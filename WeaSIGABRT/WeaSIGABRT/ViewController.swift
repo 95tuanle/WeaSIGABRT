@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  WeSIGABRT
+//  WeaSIGABRT
 //
 //  Created by Tuan Le on 9/21/18.
 //  Copyright © 2018 Tuan Le. All rights reserved.
