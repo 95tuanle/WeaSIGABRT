@@ -20,30 +20,21 @@ import CoreLocation
 class ViewController: UIViewController {
     let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
     let point = WXKDarkSkyRequest.Point(latitude: 51.4825891, longitude: -0.0164137)
-//    let timeMachine
     let dateFormatter = DateFormatter()
-
-    
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         let date = dateFormatter.date(from: "20/09/2018 08:00")
-        // Do any additional setup after loading the view, typically from a nib.
         request.loadData(point: point, time: date) { (data, error) in
             if let error = error {
-                // Handle errors here...
                 print(error)
             } else if let data = data {
-                // Handle the received data here...
                 print(data)
             }
         }
     }
-
-
 }
 
