@@ -1,0 +1,16 @@
+PODS:
+  - WXKDarkSky (2.2.0)
+
+DEPENDENCIES:
+  - WXKDarkSky (~> 2.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - WXKDarkSky
+
+SPEC CHECKSUMS:
+  WXKDarkSky: d532c1fc3b3071fd7136c1ae3c78dc23e50a78f9
+
+PODFILE CHECKSUM: 69c05cd95693da82e29986d82b37355049f533f5
+
+COCOAPODS: 1.6.0.beta.1
