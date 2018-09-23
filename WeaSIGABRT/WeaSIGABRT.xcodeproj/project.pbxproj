@@ -13,6 +13,8 @@
 		AF01DB93215531EE00A11420 /* WeaSIGABRT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF01DB91215531EE00A11420 /* WeaSIGABRT.xcdatamodeld */; };
 		AF01DB95215531EF00A11420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF01DB94215531EF00A11420 /* Assets.xcassets */; };
 		AF01DB98215531EF00A11420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */; };
+		AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */; };
+		AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE2438721582D6600C36560 /* AddCityViewController.swift */; };
 		F64FE0C14F27340E22DC4167 /* Pods_WeaSIGABRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238EAF2703D202B08731065F /* Pods_WeaSIGABRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,8 @@
 		AF01DB94215531EF00A11420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF01DB97215531EF00A11420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF01DB99215531EF00A11420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCityWeatherListViewController.swift; sourceTree = "<group>"; };
+		AFE2438721582D6600C36560 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				AF01DB8A215531EE00A11420 /* AppDelegate.swift */,
 				AF01DB8C215531EE00A11420 /* ViewController.swift */,
+				AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */,
+				AFE2438721582D6600C36560 /* AddCityViewController.swift */,
 				AF01DB8E215531EE00A11420 /* Main.storyboard */,
 				AF01DB94215531EF00A11420 /* Assets.xcassets */,
 				AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */,
@@ -88,7 +94,6 @@
 				82E00D27664FFE8A97500B3A /* Pods-WeaSIGABRT.debug.xcconfig */,
 				56756BAE7FA18742C72B6AC8 /* Pods-WeaSIGABRT.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -212,6 +217,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */,
+				AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */,
 				AF01DB8D215531EE00A11420 /* ViewController.swift in Sources */,
 				AF01DB93215531EE00A11420 /* WeaSIGABRT.xcdatamodeld in Sources */,
 				AF01DB8B215531EE00A11420 /* AppDelegate.swift in Sources */,
