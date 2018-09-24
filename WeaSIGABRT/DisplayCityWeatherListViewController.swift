@@ -21,6 +21,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     var cities:[City] = []
     var selectedRow: Int!
+
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
     @IBAction func metricSwitch(_ sender: Any) {
@@ -100,6 +101,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
         self.performSegue(withIdentifier: "Detail City", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     //Pass data from table view to View/Edit through segue
