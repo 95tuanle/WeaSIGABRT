@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (4.7.3)
+  - WXKDarkSky (2.2.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - WXKDarkSky (~> 2.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - WXKDarkSky
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  WXKDarkSky: d532c1fc3b3071fd7136c1ae3c78dc23e50a78f9
+
+PODFILE CHECKSUM: 56726d1348b91a612fcd2463528f5555c099dbab
+
+COCOAPODS: 1.5.3

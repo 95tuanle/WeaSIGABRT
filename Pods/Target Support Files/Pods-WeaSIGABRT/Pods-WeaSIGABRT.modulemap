@@ -1,0 +1,6 @@
+framework module Pods_WeaSIGABRT {
+  umbrella header "Pods-WeaSIGABRT-umbrella.h"
+
+  export *
+  module * { export * }
+}
