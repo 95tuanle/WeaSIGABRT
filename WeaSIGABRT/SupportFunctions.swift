@@ -30,5 +30,10 @@ class SupportFunctions {
     static func saveContext() {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
+    
+    static func deleteCity(city:City) {
+        createContext().delete(city)
+        saveContext()
+    }
 }
 

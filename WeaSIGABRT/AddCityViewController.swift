@@ -17,6 +17,7 @@ import UIKit
 import MapKit
 import CoreData
 
+
 class AddCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
     @IBOutlet weak var searchCity: UISearchBar!
     @IBOutlet weak var resultTable: UITableView!
@@ -63,7 +64,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
             newCity.name = mapItem?.name
             newCity.lat = (coordinate?.latitude)!
             newCity.long = (coordinate?.longitude)!
-            newCity.timeZone = mapItem?.timeZone as! NSObject
+            newCity.timeZone = mapItem?.timeZone
             SupportFunctions.saveContext()
             self.performSegue(withIdentifier: "Added", sender: nil)
         }
