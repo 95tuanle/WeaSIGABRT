@@ -21,7 +21,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     var cities:[City] = []
     var selectedRow: Int!
-    
+
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
     @IBAction func metricSwitch(_ sender: Any) {
@@ -98,18 +98,19 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         return true
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        self.performSegue(withIdentifier: "Detail City", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    //Pass data from table view to View/Edit through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail City" {
             let nav = segue.destination as! UINavigationController
             let detailCity = nav.topViewController as! ViewWeatherViewController
             detailCity.city = cities[selectedRow!]
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRow = indexPath.row
-        self.performSegue(withIdentifier: "Detail City", sender: nil)
-        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
