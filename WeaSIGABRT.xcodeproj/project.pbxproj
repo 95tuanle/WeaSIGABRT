@@ -20,6 +20,7 @@
 		9B29394A2158BEA500799E40 /* DisplayCityWeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */; };
 		9B29394C2158BEB800799E40 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29394B2158BEB800799E40 /* AddCityViewController.swift */; };
 		9B29394E2158BEC600799E40 /* SupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29394D2158BEC600799E40 /* SupportFunctions.swift */; };
+		EE8A9F622158DAF7002D710A /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE8A9F612158DAF7002D710A /* DailyTableViewCell.xib */; };
 		9B29396B2158C3B300799E40 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939672158C3B300799E40 /* CurrentWeather.swift */; };
 		9B29396C2158C3B300799E40 /* Feature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2939682158C3B300799E40 /* Feature.xib */; };
 		9B29396D2158C3B300799E40 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939692158C3B300799E40 /* FeatureView.swift */; };
@@ -50,6 +51,7 @@
 		9B29396A2158C3B300799E40 /* ForecastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastService.swift; sourceTree = "<group>"; };
 		9B2939702158D61800799E40 /* ViewWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWeatherViewController.swift; sourceTree = "<group>"; };
 		A6A10245169B38F773D6B905 /* Pods_WeaSIGABRT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeaSIGABRT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE8A9F612158DAF7002D710A /* DailyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		9B2939332158BC1E00799E40 /* WeaSIGABRT */ = {
 			isa = PBXGroup;
 			children = (
+				EE8A9F632158DB17002D710A /* DailyWeatherViewController */,
 				9B2939382158BC1E00799E40 /* Main.storyboard */,
 				9B2939342158BC1E00799E40 /* AppDelegate.swift */,
 				9B29394D2158BEC600799E40 /* SupportFunctions.swift */,
@@ -138,6 +141,14 @@
 				53D37176C19AAFD1B153187E /* Pods-WeaSIGABRT.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EE8A9F632158DB17002D710A /* DailyWeatherViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EE8A9F612158DAF7002D710A /* DailyTableViewCell.xib */,
+			);
+			path = DailyWeatherViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +213,7 @@
 			files = (
 				9B29396C2158C3B300799E40 /* Feature.xib in Resources */,
 				9B2939422158BC1E00799E40 /* LaunchScreen.storyboard in Resources */,
+				EE8A9F622158DAF7002D710A /* DailyTableViewCell.xib in Resources */,
 				9B29393F2158BC1E00799E40 /* Assets.xcassets in Resources */,
 				9B29393A2158BC1E00799E40 /* Main.storyboard in Resources */,
 				136125DB2158C2F0005D75C9 /* HourlyCollectionViewCell.xib in Resources */,
