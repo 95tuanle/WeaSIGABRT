@@ -18,19 +18,18 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     var summaryData = [DailyWeather]()
     var featureView = Bundle.main.loadNibNamed("Feature", owner: self, options: nil)?.first as? FeatureView
     
-    @IBOutlet weak var navItem: UINavigationItem!
+//    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var currentScrollView: UIScrollView!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
-    @IBAction func dismiss(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureEntryData(entry: city)
-        navItem.title = city.name
+//        navItem.title = city.name
+        self.navigationItem.title = city.name
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
         
         hourlyCollectionView.dataSource = self
         hourlyCollectionView.delegate = self
@@ -38,6 +37,11 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         dailyTableView.dataSource = self
         dailyTableView.delegate = self
         dailyTableView.allowsSelection = false
+    }
+    
+    
+    @objc func dismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

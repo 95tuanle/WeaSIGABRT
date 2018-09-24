@@ -117,7 +117,7 @@
                         <outlet property="metricSwitchLabel" destination="HvH-ru-Sjc" id="VLM-WM-fEt"/>
                         <outlet property="temperatureSwitchLabel" destination="ohD-F1-M3L" id="CP0-dg-Zdl"/>
                         <segue destination="LLW-Iw-8To" kind="show" identifier="Add City" id="iFd-bR-18a"/>
-                        <segue destination="Yfx-iZ-Tff" kind="presentation" identifier="Detail City" id="aMm-Ox-ujb"/>
+                        <segue destination="mWg-XO-1Kh" kind="show" identifier="Detail City" id="VZu-id-buv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYk-y4-B9z" sceneMemberID="firstResponder"/>
@@ -243,41 +243,34 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ej3-rp-WLC"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QoA-bz-I2c">
-                        <barButtonItem key="leftBarButtonItem" title="←" id="qob-EL-vtP">
-                            <connections>
-                                <action selector="dismiss:" destination="28I-x9-iy5" id="9jd-br-TR9"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="QoA-bz-I2c"/>
                     <connections>
                         <outlet property="currentScrollView" destination="4dk-Q3-r0r" id="9W5-Jz-mdV"/>
                         <outlet property="dailyTableView" destination="gHU-r8-pA7" id="2F6-sH-Uuk"/>
                         <outlet property="hourlyCollectionView" destination="xvm-mm-j4i" id="I2q-v4-7th"/>
-                        <outlet property="navItem" destination="QoA-bz-I2c" id="amq-qQ-pWK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjz-dC-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2016.8" y="943.17841079460277"/>
+            <point key="canvasLocation" x="1965" y="941"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="ate-VU-Dzo">
+        <scene sceneID="pfF-dS-rfP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yfx-iZ-Tff" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mWg-XO-1Kh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rZc-6y-eQZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Kr-PZ-UWH">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="28I-x9-iy5" kind="relationship" relationship="rootViewController" id="SGl-z0-vrr"/>
+                        <segue destination="28I-x9-iy5" kind="relationship" relationship="rootViewController" id="uE8-gb-XJw"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qmj-Nx-vXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1U-fS-baL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="943.17841079460277"/>
+            <point key="canvasLocation" x="1078" y="942"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
