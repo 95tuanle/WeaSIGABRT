@@ -17,13 +17,12 @@ import UIKit
 import MapKit
 import CoreData
 
-
 class AddCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
+    
     @IBOutlet weak var searchCity: UISearchBar!
     @IBOutlet weak var resultTable: UITableView!
     var results:[String] = []
     var internalResults:[MKLocalSearchCompletion] = []
-    
     lazy var searchCompleter: MKLocalSearchCompleter = {
         let searchCompleter = MKLocalSearchCompleter()
         searchCompleter.delegate = self

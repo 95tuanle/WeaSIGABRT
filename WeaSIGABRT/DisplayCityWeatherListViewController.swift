@@ -17,9 +17,9 @@ import UIKit
 import CoreData
 
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var cityTable: UITableView!
+    
     var cities:[City] = []
-
+    @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
     @IBAction func metricSwitch(_ sender: Any) {
         switch SupportFunctions.isMetric {
@@ -33,7 +33,6 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
             print("Switching to Metric System")
         }
     }
-    
     @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
     @IBAction func temperatureSwitch(_ sender: Any) {
         switch SupportFunctions.isCelsius {
@@ -49,6 +48,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
             cityTable.reloadData()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTable.tableFooterView = UIView()
@@ -76,12 +76,12 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = cities[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        cell.placeName.text = cities[indexPath.row].name
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
+        dateFormatter.dateFormat = "HH:mm"
         dateFormatter.timeZone = cities[indexPath.row].timeZone
-        cell.detailTextLabel?.text = dateFormatter.string(from: Date())
+        cell.localTime.text = dateFormatter.string(from: Date())
         return cell
     }
     
@@ -122,4 +122,10 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
             print(error)
         }
     }
+}
+
+class CustomTableViewCell: UITableViewCell {
+    @IBOutlet weak var localTime: UILabel!
+    @IBOutlet weak var placeName: UILabel!
+    @IBOutlet weak var temperature: UILabel!
 }

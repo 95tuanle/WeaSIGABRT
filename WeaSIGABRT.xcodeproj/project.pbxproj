@@ -106,15 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				9B2939382158BC1E00799E40 /* Main.storyboard */,
-				9B2939342158BC1E00799E40 /* AppDelegate.swift */,
 				9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */,
 				9B29394B2158BEB800799E40 /* AddCityViewController.swift */,
-				9B2939362158BC1E00799E40 /* ViewController.swift */,
 				9B2939702158D61800799E40 /* ViewWeatherViewController.swift */,
 				9B29394D2158BEC600799E40 /* SupportFunctions.swift */,
 				EE8A9F632158DB17002D710A /* DailyWeatherViewController */,
 				136125DC2158C2FA005D75C9 /* HourlyWeatherViewController */,
 				9B2939662158C39B00799E40 /* CurrentWeatherViewController */,
+				9B2939342158BC1E00799E40 /* AppDelegate.swift */,
+				9B2939362158BC1E00799E40 /* ViewController.swift */,
 				9B29393E2158BC1E00799E40 /* Assets.xcassets */,
 				9B2939402158BC1E00799E40 /* LaunchScreen.storyboard */,
 				9B2939432158BC1E00799E40 /* Info.plist */,
@@ -429,7 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9GJP5DXQZ;
+				DEVELOPMENT_TEAM = N8955PM583;
 				INFOPLIST_FILE = WeaSIGABRT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -448,7 +448,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9GJP5DXQZ;
+				DEVELOPMENT_TEAM = N8955PM583;
 				INFOPLIST_FILE = WeaSIGABRT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
