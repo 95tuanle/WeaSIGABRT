@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		136125DB2158C2F0005D75C9 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136125DA2158C2F0005D75C9 /* HourlyCollectionViewCell.xib */; };
 		136125DE2158D668005D75C9 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136125DD2158D668005D75C9 /* HourlyCollectionViewCell.swift */; };
+		136125E02158D918005D75C9 /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136125DF2158D918005D75C9 /* HourlyWeather.swift */; };
 		432F85B12B1644C00D9567EC /* Pods_WeaSIGABRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A10245169B38F773D6B905 /* Pods_WeaSIGABRT.framework */; };
 		9B2939352158BC1E00799E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939342158BC1E00799E40 /* AppDelegate.swift */; };
 		9B2939372158BC1E00799E40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939362158BC1E00799E40 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		136125DA2158C2F0005D75C9 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
 		136125DD2158D668005D75C9 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		136125DF2158D918005D75C9 /* HourlyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
 		1F0740DEE2E6B5338D1A363C /* Pods-WeaSIGABRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeaSIGABRT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT.debug.xcconfig"; sourceTree = "<group>"; };
 		53D37176C19AAFD1B153187E /* Pods-WeaSIGABRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeaSIGABRT.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT.release.xcconfig"; sourceTree = "<group>"; };
 		9B2939312158BC1E00799E40 /* WeaSIGABRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeaSIGABRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				136125DD2158D668005D75C9 /* HourlyCollectionViewCell.swift */,
+				136125DF2158D918005D75C9 /* HourlyWeather.swift */,
 				136125DA2158C2F0005D75C9 /* HourlyCollectionViewCell.xib */,
 			);
 			path = HourlyWeatherViewController;
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				136125DE2158D668005D75C9 /* HourlyCollectionViewCell.swift in Sources */,
+				136125E02158D918005D75C9 /* HourlyWeather.swift in Sources */,
 				9B29394C2158BEB800799E40 /* AddCityViewController.swift in Sources */,
 				9B29394E2158BEC600799E40 /* SupportFunctions.swift in Sources */,
 				9B2939372158BC1E00799E40 /* ViewController.swift in Sources */,
