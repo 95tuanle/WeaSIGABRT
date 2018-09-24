@@ -17,6 +17,10 @@
 		9B29394A2158BEA500799E40 /* DisplayCityWeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */; };
 		9B29394C2158BEB800799E40 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29394B2158BEB800799E40 /* AddCityViewController.swift */; };
 		9B29394E2158BEC600799E40 /* SupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29394D2158BEC600799E40 /* SupportFunctions.swift */; };
+		9B29396B2158C3B300799E40 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939672158C3B300799E40 /* CurrentWeather.swift */; };
+		9B29396C2158C3B300799E40 /* Feature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2939682158C3B300799E40 /* Feature.xib */; };
+		9B29396D2158C3B300799E40 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2939692158C3B300799E40 /* FeatureView.swift */; };
+		9B29396E2158C3B300799E40 /* ForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29396A2158C3B300799E40 /* ForecastService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCityWeatherListViewController.swift; sourceTree = "<group>"; };
 		9B29394B2158BEB800799E40 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		9B29394D2158BEC600799E40 /* SupportFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFunctions.swift; sourceTree = "<group>"; };
+		9B2939672158C3B300799E40 /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		9B2939682158C3B300799E40 /* Feature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Feature.xib; sourceTree = "<group>"; };
+		9B2939692158C3B300799E40 /* FeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
+		9B29396A2158C3B300799E40 /* ForecastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastService.swift; sourceTree = "<group>"; };
 		A6A10245169B38F773D6B905 /* Pods_WeaSIGABRT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeaSIGABRT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,12 +91,24 @@
 				9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */,
 				9B29394B2158BEB800799E40 /* AddCityViewController.swift */,
 				9B29394D2158BEC600799E40 /* SupportFunctions.swift */,
+				9B2939662158C39B00799E40 /* CurrentWeatherViewController */,
 				9B29393E2158BC1E00799E40 /* Assets.xcassets */,
 				9B2939402158BC1E00799E40 /* LaunchScreen.storyboard */,
 				9B2939432158BC1E00799E40 /* Info.plist */,
 				9B29393B2158BC1E00799E40 /* WeaSIGABRT.xcdatamodeld */,
 			);
 			path = WeaSIGABRT;
+			sourceTree = "<group>";
+		};
+		9B2939662158C39B00799E40 /* CurrentWeatherViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9B2939672158C3B300799E40 /* CurrentWeather.swift */,
+				9B2939682158C3B300799E40 /* Feature.xib */,
+				9B2939692158C3B300799E40 /* FeatureView.swift */,
+				9B29396A2158C3B300799E40 /* ForecastService.swift */,
+			);
+			path = CurrentWeatherViewController;
 			sourceTree = "<group>";
 		};
 		CFA064F71D05FD434164AFDD /* Pods */ = {
@@ -160,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B29396C2158C3B300799E40 /* Feature.xib in Resources */,
 				9B2939422158BC1E00799E40 /* LaunchScreen.storyboard in Resources */,
 				9B29393F2158BC1E00799E40 /* Assets.xcassets in Resources */,
 				9B29393A2158BC1E00799E40 /* Main.storyboard in Resources */,
@@ -223,8 +244,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B29394C2158BEB800799E40 /* AddCityViewController.swift in Sources */,
+				9B29396E2158C3B300799E40 /* ForecastService.swift in Sources */,
 				9B29394E2158BEC600799E40 /* SupportFunctions.swift in Sources */,
 				9B2939372158BC1E00799E40 /* ViewController.swift in Sources */,
+				9B29396D2158C3B300799E40 /* FeatureView.swift in Sources */,
+				9B29396B2158C3B300799E40 /* CurrentWeather.swift in Sources */,
 				9B29393D2158BC1E00799E40 /* WeaSIGABRT.xcdatamodeld in Sources */,
 				9B2939352158BC1E00799E40 /* AppDelegate.swift in Sources */,
 				9B29394A2158BEA500799E40 /* DisplayCityWeatherListViewController.swift in Sources */,
