@@ -15,6 +15,7 @@
 		AF01DB98215531EF00A11420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */; };
 		AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */; };
 		AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE2438721582D6600C36560 /* AddCityViewController.swift */; };
+		AFE2438A21585D5E00C36560 /* SupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE2438921585D5E00C36560 /* SupportFunctions.swift */; };
 		F64FE0C14F27340E22DC4167 /* Pods_WeaSIGABRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238EAF2703D202B08731065F /* Pods_WeaSIGABRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		AF01DB99215531EF00A11420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCityWeatherListViewController.swift; sourceTree = "<group>"; };
 		AFE2438721582D6600C36560 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		AFE2438921585D5E00C36560 /* SupportFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				AF01DB8C215531EE00A11420 /* ViewController.swift */,
 				AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */,
 				AFE2438721582D6600C36560 /* AddCityViewController.swift */,
+				AFE2438921585D5E00C36560 /* SupportFunctions.swift */,
 				AF01DB8E215531EE00A11420 /* Main.storyboard */,
 				AF01DB94215531EF00A11420 /* Assets.xcassets */,
 				AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */,
+				AFE2438A21585D5E00C36560 /* SupportFunctions.swift in Sources */,
 				AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */,
 				AF01DB8D215531EE00A11420 /* ViewController.swift in Sources */,
 				AF01DB93215531EE00A11420 /* WeaSIGABRT.xcdatamodeld in Sources */,
