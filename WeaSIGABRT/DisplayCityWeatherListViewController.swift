@@ -19,7 +19,36 @@ import CoreData
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var cityTable: UITableView!
     var cities:[City] = []
+
+    @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
+    @IBAction func metricSwitch(_ sender: Any) {
+        switch SupportFunctions.isMetric {
+        case true:
+            metricSwitchLabel.title = "Imperial"
+            SupportFunctions.isMetric = false
+            print("Switching to Imperial System")
+        case false:
+            metricSwitchLabel.title = "Metric"
+            SupportFunctions.isMetric = true
+            print("Switching to Metric System")
+        }
+    }
     
+    @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
+    @IBAction func temperatureSwitch(_ sender: Any) {
+        switch SupportFunctions.isCelsius {
+        case true:
+            temperatureSwitchLabel.title = "˚F"
+            SupportFunctions.isCelsius = false
+            print("Switching to F")
+            cityTable.reloadData()
+        case false:
+            temperatureSwitchLabel.title = "˚C"
+            SupportFunctions.isCelsius = true
+            print("Switching to C")
+            cityTable.reloadData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTable.tableFooterView = UIView()
@@ -39,7 +68,6 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     }
     
     @objc func addCity() {
-        
         self.performSegue(withIdentifier: "Add City", sender: nil)
     }
     
@@ -62,7 +90,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "", sender: nil)
+        self.performSegue(withIdentifier: "Detail City", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -4,7 +4,7 @@ This code is available under the MIT licence:  https://opensource.org/licenses/M
 import CoreLocation
 open class TimezoneMapper {
 
-    open static func latLngToTimezoneString(_ location: CLLocationCoordinate2D) -> String
+    public static func latLngToTimezoneString(_ location: CLLocationCoordinate2D) -> String
     {
         if poly.isEmpty {
             TimezoneMapper.initPolyArray()
@@ -12,7 +12,7 @@ open class TimezoneMapper {
         let tzId = timezoneStrings[getTzInt(lat: Float(location.latitude), lng: Float(location.longitude))]
         return tzId
     }
-    open static func latLngToTimezone(_ location: CLLocationCoordinate2D) -> TimeZone?
+    public static func latLngToTimezone(_ location: CLLocationCoordinate2D) -> TimeZone?
     {
         let tzId = latLngToTimezoneString(location)
         return TimeZone(identifier: tzId)

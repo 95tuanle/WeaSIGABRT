@@ -76,9 +76,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.resultTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         cell.textLabel?.text = self.results[indexPath.row]
-        
         return cell
     }
     
@@ -93,8 +91,6 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         //get result, transform it to our needs and fill our dataSource
         self.internalResults = completer.results
         self.results = internalResults.map { $0.title }
-        
-        
         DispatchQueue.main.async {
             self.resultTable.reloadData()
         }
