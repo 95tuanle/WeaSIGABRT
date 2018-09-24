@@ -49,7 +49,7 @@ class SupportFunctions {
                 if let error = error {
                     print(error)
                 } else if let data = data {
-                    temp = (data.currently!.apparentTemperature)!
+                    temp = (data.currently!.temperature)!
                     
                     group.leave()
                 }
