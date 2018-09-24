@@ -16,11 +16,35 @@
 import Foundation
 import CoreData
 import UIKit
+import WXKDarkSky
 
 class SupportFunctions {
     
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
+    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
+    
+    static func getCurrentTemperature(latitude: Double, longitude: Double) -> Double {
+        let group = DispatchGroup()
+        group.enter()
+        
+        let point = WXKDarkSkyRequest.Point(latitude: latitude, longitude: longitude)
+        var temp:Double?
+        DispatchQueue.global().async {
+            request.loadData(point: point) { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    temp = (data.currently!.apparentTemperature)!
+                    
+                    group.leave()
+                }
+            }
+        }
+        
+        group.wait()
+        return temp!
+    }
     
     static func createContext() -> NSManagedObjectContext {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -39,9 +63,11 @@ class SupportFunctions {
         saveContext()
     }
     
-    static func fahrenheitToCelsius(temperature: Double) -> Double {
+    static func fahrenheitToCelsius(temperature: Double) -> Int {
+//        print(temperature)
         let celsiusTemperature = (temperature-32)*(5/9)
-        return celsiusTemperature
+//        print(celsiusTemperature)
+        return Int(celsiusTemperature)
     }
     
     static func localTimeAtThatLocationCustom(time: Double, identifier: String, format: String) -> String {

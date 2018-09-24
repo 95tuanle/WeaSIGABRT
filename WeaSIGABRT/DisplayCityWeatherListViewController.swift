@@ -15,6 +15,7 @@
 
 import UIKit
 import CoreData
+import WXKDarkSky
 
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -26,11 +27,11 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         case true:
             metricSwitchLabel.title = "Imperial"
             SupportFunctions.isMetric = false
-            print("Switching to Imperial System")
+//            print("Switching to Imperial System")
         case false:
             metricSwitchLabel.title = "Metric"
             SupportFunctions.isMetric = true
-            print("Switching to Metric System")
+//            print("Switching to Metric System")
         }
     }
     @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
@@ -39,12 +40,12 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         case true:
             temperatureSwitchLabel.title = "˚F"
             SupportFunctions.isCelsius = false
-            print("Switching to F")
+//            print("Switching to F")
             cityTable.reloadData()
         case false:
             temperatureSwitchLabel.title = "˚C"
             SupportFunctions.isCelsius = true
-            print("Switching to C")
+//            print("Switching to C")
             cityTable.reloadData()
         }
     }
@@ -77,11 +78,17 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.placeName.text = cities[indexPath.row].name
+        let city = cities[indexPath.row]
+        cell.placeName.text = city.name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.timeZone = cities[indexPath.row].timeZone
+        dateFormatter.timeZone = city.timeZone
         cell.localTime.text = dateFormatter.string(from: Date())
+        if SupportFunctions.isCelsius {
+            cell.temperature.text = String("\(SupportFunctions.fahrenheitToCelsius(temperature: SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long)))˚")
+        } else {
+            cell.temperature.text = String("\(Int(SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long)))˚")
+        }
         return cell
     }
     
