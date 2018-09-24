@@ -34,6 +34,11 @@ class SupportFunctions {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
+    static func deleteCity(city:City) {
+        createContext().delete(city)
+        saveContext()
+    }
+    
     static func fahrenheitToCelsius(temperature: Double) -> Double {
         let celsiusTemperature = (temperature-32)*(5/9)
         return celsiusTemperature

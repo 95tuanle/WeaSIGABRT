@@ -1,40 +1,25 @@
-/*
- RMIT University Vietnam
- Course: COSC2659 iOS Development
- Semester: 2018B
- Assessment: Project
- Author:
- -   Ngo Vu Nguyen (s3480522)
- -   Le Pham Ngoc Hoai (s3636085)
- -   Le Nguyen Anh Tuan (s3574983)
- -   Mai Pham Quang Huy (s3618861)
- ID: s3480522,s3636085, s3574983, s3618861
- Created date: 18/9/2018
- Acknowledgment:
- */
+//
+//  DisplayTableViewController.swift
+//  Interface
+//
+//  Created by Mai Pham Quang Huy on 9/13/18.
+//  Copyright © 2018 Mai Pham Quang Huy. All rights reserved.
+//
 
 import UIKit
-import CoreData
-import LatLongToTimezone
 import CoreLocation
+import LatLongToTimezone
 
-class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DisplayTableViewController: UITableViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
-    @IBAction func temperatureSwitch(_ sender: Any) {
-        switch SupportFunctions.isCelsius {
-        case true:
-            temperatureSwitchLabel.title = "˚F"
-            SupportFunctions.isCelsius = false
-            print("Switching to F")
-            cityTable.reloadData()
-        case false:
-            temperatureSwitchLabel.title = "˚C"
-            SupportFunctions.isCelsius = true
-            print("Switching to C")
-            cityTable.reloadData()
-        }
-    }
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var items: [Item] = []
+    var selectedIndex: Int!
+    
+    var filteredData: [Item] = []
+    
+    var lat = CLLocationDegrees()
+    var long = CLLocationDegrees()
     
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
     @IBAction func metricSwitch(_ sender: Any) {
@@ -50,104 +35,72 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         }
     }
     
-    @IBOutlet weak var cityTable: UITableView!
-    
-    var cities:[City] = []
-    var selectedIndex: Int!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    @IBOutlet weak var temperatureSwitchLabel: UIButton!
+    @IBAction func temperatureSwitch(_ sender: UIButton) {
+        switch SupportFunctions.isCelsius {
+        case true:
+            temperatureSwitchLabel.setTitle("˚F", for: .normal)
+            SupportFunctions.isCelsius = false
+            print("Switching to F")
+            tableView.reloadData()
+        case false:
+            temperatureSwitchLabel.setTitle("˚C", for: .normal)
+            SupportFunctions.isCelsius = true
+            print("Switching to C")
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cityTable.tableFooterView = UIView()
-        cityTable.dataSource = self
-        cityTable.delegate = self
-        cityTable.rowHeight = 100
-        self.title = "WeaSIGABRT"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.largeTitleDisplayMode = .always
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
-        fetchData()
+        
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.reloadData()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         fetchData()
-    }
-    
-    @objc func addCity() {
-        
-        self.performSegue(withIdentifier: "Add City", sender: nil)
-    }
-    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return cities.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.text = cities[indexPath.row].name
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
-//        dateFormatter.timeZone = cities[indexPath.row].timeZone as! TimeZone
-//        cell.detailTextLabel?.text = dateFormatter.string(from: Date())
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "", sender: nil)
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            cityTable.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-    
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        cityTable.setEditing(editing, animated: animated)
-        if editing {
-            self.navigationItem.rightBarButtonItem = nil
-        } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
-        }
     }
     
     func fetchData() {
         do {
-            cities = try SupportFunctions.createContext().fetch(City.fetchRequest())
+            items = try context.fetch(Item.fetchRequest())
+            filteredData = items
             DispatchQueue.main.async {
-                self.cityTable.reloadData()
+                self.tableView.reloadData()
             }
         } catch {
-            print(error)
+            print("Couldn't Fetch Data")
         }
     }
+    
 }
 
 class CustomTableViewCell: UITableViewCell {
-    @IBOutlet weak var cellPlaceName: UILabel!
     @IBOutlet weak var cellLocalTime: UILabel!
+    @IBOutlet weak var cellPlaceName: UILabel!
     @IBOutlet weak var cellTemperature: UILabel!
 }
 
-extension DisplayCityWeatherListViewController {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+extension DisplayTableViewController {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
         //Pull the city name saved from Core Data
-        cell.cellPlaceName.text = cities[indexPath.row].name
+        cell.cellPlaceName.text = filteredData[indexPath.row].name
         
-        let location = CLLocationCoordinate2D(latitude: self.cities[indexPath.row].lat, longitude: self.cities[indexPath.row].long)
+        let location = CLLocationCoordinate2D(latitude: self.filteredData[indexPath.row].lat, longitude: self.filteredData[indexPath.row].long)
         let timeZone = TimezoneMapper.latLngToTimezoneString(location)
         
         //Populate cellLocalTime and cellTemperature labels with data fetched from forecast API
-        ForecastService(APIKey: "9b43add4303def8ddb395cc7fec44be7").getCurrentWeather(latitude: cities[indexPath.row].lat, longitude: cities[indexPath.row].long, completion: { (currentWeather) in
+        ForecastService(APIKey: "9b43add4303def8ddb395cc7fec44be7").getCurrentWeather(latitude: filteredData[indexPath.row].lat, longitude: filteredData[indexPath.row].long, completion: { (currentWeather) in
             if let currentWeather = currentWeather {
                 if let temperature = currentWeather.temperature {
                     if SupportFunctions.isCelsius == true {
@@ -168,42 +121,91 @@ extension DisplayCityWeatherListViewController {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredData.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return cities.count
+    //Get the indexPath and perform a pass to another View Controller through segue
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        performSegue(withIdentifier: "viewWeatherVC", sender: self)
+//        performSegue(withIdentifier: "basicVC", sender: self)
+//        performSegue(withIdentifier: "detailsVC", sender: self)
+//        performSegue(withIdentifier: "moreDetailsVC", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+        print(selectedIndex)
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    
+//    func parseSegue(for segue: UIStoryboardSegue, sender: Any?, completion: @escaping () -> Void) -> Void{
+//        if segue.identifier == "viewWeatherVC" {
+//            let viewWeatherVC = segue.destination as! ViewWeatherViewController
+//            viewWeatherVC.item = filteredData[selectedIndex!]
+//        }
+//        else if segue.identifier == "basicVC" {
+//            let basicVC = segue.destination as! SBBasicViewController
+//            basicVC.item = filteredData[selectedIndex!]
+//        }
+//        else if segue.identifier == "detailsVC" {
+//            let detailsVC = segue.destination as! SBDetailsViewController
+//            detailsVC.item = filteredData[selectedIndex!]
+//        }
+//        else if segue.identifier == "moreDetailsVC" {
+//            let moreDetailsVC = segue.destination as! SBMoreDetailsViewController
+//            moreDetailsVC.item = filteredData[selectedIndex!]
+//        }
+//        completion()
+//    }
+    
+    //Prepare to pass index to another View Controller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewWeatherVC" {
+            let viewWeatherVC = segue.destination as! ViewWeatherViewController
+            viewWeatherVC.item = filteredData[selectedIndex!]
+        }
+//        if segue.identifier == "basicVC" {
+//            let basicVC = segue.destination as! SBBasicViewController
+//            basicVC.item = filteredData[selectedIndex!]
+//        }
+//        if segue.identifier == "detailsVC" {
+//            let detailsVC = segue.destination as! SBDetailsViewController
+//            detailsVC.item = filteredData[selectedIndex!]
+//        }
+//        if segue.identifier == "moreDetailsVC" {
+//            let moreDetailsVC = segue.destination as! SBMoreDetailsViewController
+//            moreDetailsVC.item = filteredData[selectedIndex!]
+//        }
+//        parseSegue(for: segue, sender: sender, completion: {
+//            print("done")
+//        })
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Remove") { (action, indexPath) in
             // delete item at indexPath
-            let item = self.cities[indexPath.row]
+            let item = self.filteredData[indexPath.row]
             self.context.delete(item)
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
-            self.cities.remove(at: indexPath.row)
+            self.filteredData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
         delete.backgroundColor = UIColor(red: 240/255, green: 52/255, blue: 52/255, alpha: 1.0)
         return [delete]
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailsVC" {
-            let detailsVC = segue.destination as! ViewWeatherViewController
-            detailsVC.cities = cities[selectedIndex!]
+}
+
+//Tried to sort CoreData with this but failed - Deprecated
+//filteredData = items.removeDuplicates()
+extension Array where Element: Equatable {
+    mutating func removeDuplicates() {
+        var result = [Element]()
+        for value in self {
+            if !result.contains(value) {
+                result.append(value)
+            }
         }
+        self = result
     }
 }
