@@ -1,10 +1,17 @@
-//
-//  DisplayCityWeatherListController.swift
-//  WeaSIGABRT
-//
-//  Created by Tuan Le on 9/23/18.
-//  Copyright © 2018 Tuan Le. All rights reserved.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2018B
+ Assessment: Project
+ Author:
+ -   Ngo Vu Nguyen (s3480522)
+ -   Le Pham Ngoc Hoai (s3636085)
+ -   Le Nguyen Anh Tuan (s3574983)
+ -   Mai Pham Quang Huy (s3618861)
+ ID: s3480522,s3636085, s3574983, s3618861
+ Created date: 18/9/2018
+ Acknowledgment:
+*/
 
 import UIKit
 import CoreData
@@ -23,9 +30,14 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-
-        
+        fetchData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
+    
     @objc func addCity() {
         
         self.performSegue(withIdentifier: "Add City", sender: nil)
@@ -38,8 +50,13 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = cities[indexPath.row].name
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
+        dateFormatter.timeZone = cities[indexPath.row].timezone
+        cell.detailTextLabel?.text = dateFormatter.string(from: Date())
         return cell
     }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -64,5 +81,14 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         }
     }
     
-
+    func fetchData() {
+        do {
+            cities = try SupportFunctions.createContext().fetch(City.fetchRequest())
+            DispatchQueue.main.async {
+                self.cityTable.reloadData()
+            }
+        } catch {
+            print(error)
+        }
+    }
 }

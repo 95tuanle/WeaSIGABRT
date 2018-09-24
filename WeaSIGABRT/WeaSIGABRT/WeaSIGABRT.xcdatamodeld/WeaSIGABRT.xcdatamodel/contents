@@ -4,7 +4,7 @@
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="long" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="timezone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timezone" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="TimeZone" syncable="YES"/>
     </entity>
     <elements>
         <element name="City" positionX="-63" positionY="-18" width="128" height="105"/>
