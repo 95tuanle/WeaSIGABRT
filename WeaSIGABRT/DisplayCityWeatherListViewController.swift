@@ -52,7 +52,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         cell.textLabel?.text = cities[indexPath.row].name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
-        dateFormatter.timeZone = cities[indexPath.row].timeZone as! TimeZone
+        dateFormatter.timeZone = cities[indexPath.row].timeZone
         cell.detailTextLabel?.text = dateFormatter.string(from: Date())
         return cell
     }
@@ -67,7 +67,10 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            cityTable.deleteRows(at: [indexPath], with: .fade)
+            SupportFunctions.deleteCity(city: cities[indexPath.row])
+            cities.remove(at: indexPath.row)
+            cityTable.deleteRows(at: [indexPath], with: .automatic)
+            fetchData()
         }
     }
     
