@@ -15,6 +15,8 @@
 
 import UIKit
 import CoreData
+import LatLongToTimezone
+import CoreLocation
 
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -49,13 +51,17 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     }
     
     @IBOutlet weak var cityTable: UITableView!
+    
     var cities:[City] = []
+    var selectedIndex: Int!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTable.tableFooterView = UIView()
         cityTable.dataSource = self
         cityTable.delegate = self
+        cityTable.rowHeight = 100
         self.title = "WeaSIGABRT"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
@@ -74,33 +80,33 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         self.performSegue(withIdentifier: "Add City", sender: nil)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = cities[indexPath.row].name
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
-        dateFormatter.timeZone = cities[indexPath.row].timeZone as! TimeZone
-        cell.detailTextLabel?.text = dateFormatter.string(from: Date())
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "", sender: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            cityTable.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return cities.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        cell.textLabel?.text = cities[indexPath.row].name
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
+//        dateFormatter.timeZone = cities[indexPath.row].timeZone as! TimeZone
+//        cell.detailTextLabel?.text = dateFormatter.string(from: Date())
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.performSegue(withIdentifier: "", sender: nil)
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            cityTable.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -120,6 +126,84 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
             }
         } catch {
             print(error)
+        }
+    }
+}
+
+class CustomTableViewCell: UITableViewCell {
+    @IBOutlet weak var cellPlaceName: UILabel!
+    @IBOutlet weak var cellLocalTime: UILabel!
+    @IBOutlet weak var cellTemperature: UILabel!
+}
+
+extension DisplayCityWeatherListViewController {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        
+        //Pull the city name saved from Core Data
+        cell.cellPlaceName.text = cities[indexPath.row].name
+        
+        let location = CLLocationCoordinate2D(latitude: self.cities[indexPath.row].lat, longitude: self.cities[indexPath.row].long)
+        let timeZone = TimezoneMapper.latLngToTimezoneString(location)
+        
+        //Populate cellLocalTime and cellTemperature labels with data fetched from forecast API
+        ForecastService(APIKey: "9b43add4303def8ddb395cc7fec44be7").getCurrentWeather(latitude: cities[indexPath.row].lat, longitude: cities[indexPath.row].long, completion: { (currentWeather) in
+            if let currentWeather = currentWeather {
+                if let temperature = currentWeather.temperature {
+                    if SupportFunctions.isCelsius == true {
+                        cell.cellTemperature.text = String(format: "%.0f", SupportFunctions.fahrenheitToCelsius(temperature: temperature)) + "˚"
+                    } else {
+                        cell.cellTemperature.text = String(format: "%.0f", temperature) + "˚"
+                    }
+                } else {
+                    cell.cellTemperature.text = "--"
+                }
+                if let time = currentWeather.time {
+                    cell.cellLocalTime.text = SupportFunctions.localTimeAtThatLocationCustom(time: time, identifier: timeZone, format: "EEE dd-MM-yyyy hh:mm")
+                } else {
+                    cell.cellLocalTime.text = "--:--"
+                }
+            }
+        })
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cities.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return cities.count
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .default, title: "Remove") { (action, indexPath) in
+            // delete item at indexPath
+            let item = self.cities[indexPath.row]
+            self.context.delete(item)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            self.cities.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        delete.backgroundColor = UIColor(red: 240/255, green: 52/255, blue: 52/255, alpha: 1.0)
+        return [delete]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailsVC" {
+            let detailsVC = segue.destination as! ViewWeatherViewController
+            detailsVC.cities = cities[selectedIndex!]
         }
     }
 }
