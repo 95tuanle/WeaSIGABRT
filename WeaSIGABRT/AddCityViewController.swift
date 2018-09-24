@@ -11,7 +11,7 @@
  ID: s3480522,s3636085, s3574983, s3618861
  Created date: 18/9/2018
  Acknowledgment:
-*/
+ */
 
 import UIKit
 import MapKit
@@ -53,9 +53,9 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let searchRequest = MKLocalSearch.Request(completion: internalResults[indexPath.row])
-//        let search = MKLocalSearch(request: searchRequest)
-//        search.start { (response, error) in
+        //        let searchRequest = MKLocalSearch.Request(completion: internalResults[indexPath.row])
+        //        let search = MKLocalSearch(request: searchRequest)
+        //        search.start { (response, error) in
         MKLocalSearch(request: MKLocalSearch.Request(completion: internalResults[indexPath.row])).start { (response, error) in
             let newCity = SupportFunctions.createNewCity()
             let mapItem = response?.mapItems[0]
@@ -63,7 +63,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
             newCity.name = mapItem?.name
             newCity.lat = (coordinate?.latitude)!
             newCity.long = (coordinate?.longitude)!
-            newCity.timezone = mapItem?.timeZone
+            newCity.timeZone = mapItem?.timeZone as! NSObject
             SupportFunctions.saveContext()
             self.performSegue(withIdentifier: "Added", sender: nil)
         }
@@ -87,7 +87,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
             searchCompleter.queryFragment = searchText
         }
     }
-
+    
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         //get result, transform it to our needs and fill our dataSource
         self.internalResults = completer.results

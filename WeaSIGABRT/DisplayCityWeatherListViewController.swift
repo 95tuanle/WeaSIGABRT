@@ -11,7 +11,7 @@
  ID: s3480522,s3636085, s3574983, s3618861
  Created date: 18/9/2018
  Acknowledgment:
-*/
+ */
 
 import UIKit
 import CoreData
@@ -52,7 +52,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         cell.textLabel?.text = cities[indexPath.row].name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
-        dateFormatter.timeZone = cities[indexPath.row].timezone
+        dateFormatter.timeZone = cities[indexPath.row].timeZone as! TimeZone
         cell.detailTextLabel?.text = dateFormatter.string(from: Date())
         return cell
     }
@@ -67,7 +67,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-           cityTable.deleteRows(at: [indexPath], with: .fade)
+            cityTable.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
