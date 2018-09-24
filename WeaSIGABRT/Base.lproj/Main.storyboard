@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Display City Weather List View Controller-->
+        <!--WeaSIGABRT-->
         <scene sceneID="VWD-Le-csL">
             <objects>
                 <viewController id="btn-yI-30a" customClass="DisplayCityWeatherListViewController" customModule="WeaSIGABRT" customModuleProvider="target" sceneMemberID="viewController">
@@ -62,9 +62,26 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W6m-Qr-4r3"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Vac-al-c1o"/>
+                    <navigationItem key="navigationItem" title="WeaSIGABRT" id="Vac-al-c1o">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="edit" id="kAV-im-6qB"/>
+                            <barButtonItem title="˚C" id="ohD-F1-M3L">
+                                <connections>
+                                    <action selector="temperatureSwitch:" destination="btn-yI-30a" id="LqG-KF-VgV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Metric" id="HvH-ru-Sjc">
+                                <connections>
+                                    <action selector="metricSwitch:" destination="btn-yI-30a" id="d2o-hW-Tdr"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="abZ-Lv-cPi"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityTable" destination="ogn-7F-QgP" id="bAL-ae-P9D"/>
+                        <outlet property="metricSwitchLabel" destination="HvH-ru-Sjc" id="QFD-qe-Pxa"/>
+                        <outlet property="temperatureSwitchLabel" destination="ohD-F1-M3L" id="bgJ-5q-Tlk"/>
                         <segue destination="LLW-Iw-8To" kind="show" identifier="Add City" id="iFd-bR-18a"/>
                     </connections>
                 </viewController>

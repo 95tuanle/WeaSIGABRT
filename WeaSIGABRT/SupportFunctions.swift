@@ -19,6 +19,9 @@ import UIKit
 
 class SupportFunctions {
     
+    static var isMetric: Bool = true
+    static var isCelsius: Bool = true
+    
     static func createContext() -> NSManagedObjectContext {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }

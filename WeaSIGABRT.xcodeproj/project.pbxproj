@@ -87,10 +87,11 @@
 			children = (
 				9B2939382158BC1E00799E40 /* Main.storyboard */,
 				9B2939342158BC1E00799E40 /* AppDelegate.swift */,
-				9B2939362158BC1E00799E40 /* ViewController.swift */,
-				9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */,
-				9B29394B2158BEB800799E40 /* AddCityViewController.swift */,
 				9B29394D2158BEC600799E40 /* SupportFunctions.swift */,
+				9B29396F2158C87600799E40 /* InterfaceWeatherViewController */,
+				9B29394B2158BEB800799E40 /* AddCityViewController.swift */,
+				9B2939492158BEA500799E40 /* DisplayCityWeatherListViewController.swift */,
+				9B2939362158BC1E00799E40 /* ViewController.swift */,
 				9B2939662158C39B00799E40 /* CurrentWeatherViewController */,
 				9B29393E2158BC1E00799E40 /* Assets.xcassets */,
 				9B2939402158BC1E00799E40 /* LaunchScreen.storyboard */,
@@ -109,6 +110,13 @@
 				9B29396A2158C3B300799E40 /* ForecastService.swift */,
 			);
 			path = CurrentWeatherViewController;
+			sourceTree = "<group>";
+		};
+		9B29396F2158C87600799E40 /* InterfaceWeatherViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = InterfaceWeatherViewController;
 			sourceTree = "<group>";
 		};
 		CFA064F71D05FD434164AFDD /* Pods */ = {
