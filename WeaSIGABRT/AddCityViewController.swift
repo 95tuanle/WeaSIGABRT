@@ -56,16 +56,35 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         //        let searchRequest = MKLocalSearch.Request(completion: internalResults[indexPath.row])
         //        let search = MKLocalSearch(request: searchRequest)
         //        search.start { (response, error) in
+
+
         MKLocalSearch(request: MKLocalSearch.Request(completion: internalResults[indexPath.row])).start { (response, error) in
-            let newCity = SupportFunctions.createNewCity()
             let mapItem = response?.mapItems[0]
             let coordinate = mapItem?.placemark.coordinate
-            newCity.name = mapItem?.name
-            newCity.lat = (coordinate?.latitude)!
-            newCity.long = (coordinate?.longitude)!
-            newCity.timeZone = mapItem?.timeZone
-            SupportFunctions.saveContext()
-            self.performSegue(withIdentifier: "Added", sender: nil)
+            
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+            let predicate = NSPredicate(format: "name == %@", (mapItem?.name)!)
+            request.predicate = predicate
+            request.fetchLimit = 1
+            
+            do {
+                let count = try SupportFunctions.createContext().count(for: request)
+                DispatchQueue.main.async {
+                    if count == 0 {
+                        let newCity = SupportFunctions.createNewCity()
+                        newCity.name = mapItem?.name
+                        newCity.lat = (coordinate?.latitude)!
+                        newCity.long = (coordinate?.longitude)!
+                        newCity.timeZone = mapItem?.timeZone
+                        SupportFunctions.saveContext()
+                        self.performSegue(withIdentifier: "Added", sender: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "Added", sender: nil)
+                    }
+                }
+            } catch {
+                print(error)
+            }
         }
     }
     
