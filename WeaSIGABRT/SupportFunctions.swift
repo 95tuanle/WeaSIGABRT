@@ -23,6 +23,20 @@ class SupportFunctions {
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
     static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
+    static let apiKey: String = "9b43add4303def8ddb395cc7fec44be7"
+    
+    static let emojiIcons = [
+        "clear-day" : "☀️",
+        "clear-night" : "🌙",
+        "rain" : "☔️",
+        "snow" : "❄️",
+        "sleet" : "🌨",
+        "wind" : "🌬",
+        "fog" : "🌫",
+        "cloudy" : "☁️",
+        "partly-cloudy-day" : "🌤",
+        "partly-cloudy-night" : "🌥"
+    ]
     
     static func getCurrentTemperature(latitude: Double, longitude: Double) -> Double {
         let group = DispatchGroup()
@@ -64,9 +78,7 @@ class SupportFunctions {
     }
     
     static func fahrenheitToCelsius(temperature: Double) -> Int {
-//        print(temperature)
         let celsiusTemperature = (temperature-32)*(5/9)
-//        print(celsiusTemperature)
         return Int(celsiusTemperature)
     }
     

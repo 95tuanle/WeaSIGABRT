@@ -243,11 +243,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ej3-rp-WLC"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QoA-bz-I2c"/>
+                    <navigationItem key="navigationItem" id="QoA-bz-I2c">
+                        <barButtonItem key="leftBarButtonItem" title="←" id="qob-EL-vtP">
+                            <connections>
+                                <action selector="dismiss:" destination="28I-x9-iy5" id="9jd-br-TR9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="dailyTableView" destination="gHU-r8-pA7" id="dzx-zk-bbL"/>
-                        <outlet property="hourlyCollectionView" destination="xvm-mm-j4i" id="eoe-6Q-jK5"/>
-                        <outlet property="scrollView" destination="4dk-Q3-r0r" id="grn-zx-fJ2"/>
+                        <outlet property="currentScrollView" destination="4dk-Q3-r0r" id="9W5-Jz-mdV"/>
+                        <outlet property="dailyTableView" destination="gHU-r8-pA7" id="2F6-sH-Uuk"/>
+                        <outlet property="hourlyCollectionView" destination="xvm-mm-j4i" id="I2q-v4-7th"/>
+                        <outlet property="navItem" destination="QoA-bz-I2c" id="amq-qQ-pWK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjz-dC-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -274,7 +281,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iFd-bR-18a"/>
         <segue reference="7u6-FW-y0W"/>
     </inferredMetricsTieBreakers>
 </document>
