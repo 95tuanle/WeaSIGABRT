@@ -13,9 +13,15 @@
 		AF01DB93215531EE00A11420 /* WeaSIGABRT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF01DB91215531EE00A11420 /* WeaSIGABRT.xcdatamodeld */; };
 		AF01DB95215531EF00A11420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF01DB94215531EF00A11420 /* Assets.xcassets */; };
 		AF01DB98215531EF00A11420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */; };
+		AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */; };
+		AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE2438721582D6600C36560 /* AddCityViewController.swift */; };
+		F64FE0C14F27340E22DC4167 /* Pods_WeaSIGABRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238EAF2703D202B08731065F /* Pods_WeaSIGABRT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		238EAF2703D202B08731065F /* Pods_WeaSIGABRT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeaSIGABRT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56756BAE7FA18742C72B6AC8 /* Pods-WeaSIGABRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeaSIGABRT.release.xcconfig"; path = "Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT.release.xcconfig"; sourceTree = "<group>"; };
+		82E00D27664FFE8A97500B3A /* Pods-WeaSIGABRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeaSIGABRT.debug.xcconfig"; path = "Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT.debug.xcconfig"; sourceTree = "<group>"; };
 		AF01DB87215531EE00A11420 /* WeaSIGABRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeaSIGABRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF01DB8A215531EE00A11420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF01DB8C215531EE00A11420 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +30,8 @@
 		AF01DB94215531EF00A11420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF01DB97215531EF00A11420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF01DB99215531EF00A11420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCityWeatherListViewController.swift; sourceTree = "<group>"; };
+		AFE2438721582D6600C36560 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F64FE0C14F27340E22DC4167 /* Pods_WeaSIGABRT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B914499267DBD442F93648D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				238EAF2703D202B08731065F /* Pods_WeaSIGABRT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AF01DB7E215531EE00A11420 = {
 			isa = PBXGroup;
 			children = (
 				AF01DB89215531EE00A11420 /* WeaSIGABRT */,
 				AF01DB88215531EE00A11420 /* Products */,
+				DBAD5081DB12F3E9F5745245 /* Pods */,
+				5B914499267DBD442F93648D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +77,8 @@
 			children = (
 				AF01DB8A215531EE00A11420 /* AppDelegate.swift */,
 				AF01DB8C215531EE00A11420 /* ViewController.swift */,
+				AFE243602157D05500C36560 /* DisplayCityWeatherListViewController.swift */,
+				AFE2438721582D6600C36560 /* AddCityViewController.swift */,
 				AF01DB8E215531EE00A11420 /* Main.storyboard */,
 				AF01DB94215531EF00A11420 /* Assets.xcassets */,
 				AF01DB96215531EF00A11420 /* LaunchScreen.storyboard */,
@@ -67,6 +88,15 @@
 			path = WeaSIGABRT;
 			sourceTree = "<group>";
 		};
+		DBAD5081DB12F3E9F5745245 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82E00D27664FFE8A97500B3A /* Pods-WeaSIGABRT.debug.xcconfig */,
+				56756BAE7FA18742C72B6AC8 /* Pods-WeaSIGABRT.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF01DB9C215531EF00A11420 /* Build configuration list for PBXNativeTarget "WeaSIGABRT" */;
 			buildPhases = (
+				D8FF02E47FA549B201767619 /* [CP] Check Pods Manifest.lock */,
 				AF01DB83215531EE00A11420 /* Sources */,
 				AF01DB84215531EE00A11420 /* Frameworks */,
 				AF01DB85215531EE00A11420 /* Resources */,
+				650EA829FC97A55FF4B64A64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,11 +165,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		650EA829FC97A55FF4B64A64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/WXKDarkSky/WXKDarkSky.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WXKDarkSky.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8FF02E47FA549B201767619 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WeaSIGABRT-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AF01DB83215531EE00A11420 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE2438821582D6600C36560 /* AddCityViewController.swift in Sources */,
+				AFE243612157D05500C36560 /* DisplayCityWeatherListViewController.swift in Sources */,
 				AF01DB8D215531EE00A11420 /* ViewController.swift in Sources */,
 				AF01DB93215531EE00A11420 /* WeaSIGABRT.xcdatamodeld in Sources */,
 				AF01DB8B215531EE00A11420 /* AppDelegate.swift in Sources */,
@@ -284,6 +365,7 @@
 		};
 		AF01DB9D215531EF00A11420 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82E00D27664FFE8A97500B3A /* Pods-WeaSIGABRT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +384,7 @@
 		};
 		AF01DB9E215531EF00A11420 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56756BAE7FA18742C72B6AC8 /* Pods-WeaSIGABRT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
