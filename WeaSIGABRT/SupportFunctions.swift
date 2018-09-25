@@ -22,8 +22,8 @@ class SupportFunctions {
     
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
-//    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
-    static let request = WXKDarkSkyRequest(key: "9b43add4303def8ddb395cc7fec44be7")
+    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
+//    static let request = WXKDarkSkyRequest(key: "9b43add4303def8ddb395cc7fec44be7")
 
     static let apiKey: String = "9b43add4303def8ddb395cc7fec44be7"
     static let emojiIcons = [
@@ -39,36 +39,45 @@ class SupportFunctions {
         "partly-cloudy-night" : "🌥"
     ]
     
-    static func forecastAndTimeMachineQuery(city:City) -> [WXKDarkSkyResponse] {
+    static func forecastAndTimeMachineQuery(city:City) -> [WXKDarkSkyDataPoint] {
         let point = WXKDarkSkyRequest.Point(latitude: city.lat, longitude: city.long)
-        var responses:[WXKDarkSkyResponse] = []
+        var responses:[WXKDarkSkyDataPoint] = []
         var dates:[Date] = []
         let today = Date()
         for i in (1...7).reversed() {
             let yesterday = Calendar.current.date(byAdding: .day, value: -i, to: today)
             dates.append(yesterday!)
         }
-        dates.append(today)
-        for i in 1...7 {
-            let tomorrow = Calendar.current.date(byAdding: .day, value: +i, to: today)
-            dates.append(tomorrow!)
-        }
-        let optionsCurrently = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .minutely])
+        let options = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .hourly, .currently, .minutely])
+
         for date in dates {
             let group = DispatchGroup()
             group.enter()
             DispatchQueue.global().async {
-                request.loadData(point: point, time: date, options: optionsCurrently) { (data, error) in
+                request.loadData(point: point, time: date, options: options) { (data, error) in
                     if let error = error {
                         print(error)
                     } else if let data = data {
-                        responses.append(data)
+                         responses = responses + data.daily!.data
                         group.leave()
                     }
                 }
             }
             group.wait()
         }
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global().async {
+            request.loadData(point: point, options: options) { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    responses = responses + data.daily!.data
+                    group.leave()
+                }
+            }
+        }
+        group.wait()
         return responses
     }
     

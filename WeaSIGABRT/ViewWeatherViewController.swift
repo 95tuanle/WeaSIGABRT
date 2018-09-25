@@ -14,7 +14,7 @@ import WXKDarkSky
 class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
     var city: City!
-    var dailyForecastData = [WXKDarkSkyResponse]()
+    var dailyForecastData = [WXKDarkSkyDataPoint]()
     var hourlyForecastData = [HourlyWeather]()
     
     var summaryData = [DailyWeather]()
@@ -214,21 +214,21 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dailyTableView.dequeueReusableCell(withIdentifier: "dailyTableViewCell", for: indexPath) as! DailyTableViewCell
-        let aDate = dailyForecastData[indexPath.row].currently
+        let aDate = dailyForecastData[indexPath.row]
         let location = CLLocationCoordinate2D(latitude: city.lat, longitude: city.long)
         let timeZone = TimezoneMapper.latLngToTimezoneString(location)
         var currentLocalTime = String()
         if indexPath.row == 7 {
             currentLocalTime = "Today"
         } else {
-            currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: aDate!.time.timeIntervalSince1970, identifier: timeZone, format: "EEEE")
+            currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: aDate.time.timeIntervalSince1970, identifier: timeZone, format: "EEEE")
         }
         
         
-        featureView?.summaryLabel.text = dailyForecastData[7].daily!.data[0].summary
+        featureView?.summaryLabel.text = dailyForecastData[7].summary
         
         var convertingTemperature = String()
-        if let temperature = aDate!.temperature {
+        if let temperature = aDate.temperatureHigh {
             if SupportFunctions.isCelsius == true {
                 convertingTemperature = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: temperature))
             } else {
@@ -238,7 +238,18 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             convertingTemperature = "--˚"
         }
         
-        cell.commonInit(date: currentLocalTime, temperature: convertingTemperature, icon: SupportFunctions.emojiIcons[aDate!.icon!]!)
+        var convertingTemperatureMin = String()
+        if let temperature = aDate.temperatureLow {
+            if SupportFunctions.isCelsius == true {
+                convertingTemperatureMin = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: temperature))
+            } else {
+                convertingTemperatureMin = String(format: "%.0f˚", temperature)
+            }
+        } else {
+            convertingTemperatureMin = "--˚"
+        }
+        
+        cell.commonInit(date: currentLocalTime, temperature: convertingTemperature, temperatureMin: convertingTemperatureMin, icon: SupportFunctions.emojiIcons[aDate.icon!]!)
         
         return cell
     }
