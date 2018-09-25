@@ -40,7 +40,7 @@
                                                         <constraint firstAttribute="height" constant="56" id="l7S-Rv-tg9"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="uVB-XB-369"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -50,7 +50,7 @@
                                                         <constraint firstAttribute="height" constant="27.5" id="1Kx-Fy-07A"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27.5" id="ohG-W5-LCL"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -59,7 +59,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="FZ8-yb-z6u"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -274,6 +274,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="iFd-bR-18a"/>
         <segue reference="7u6-FW-y0W"/>
     </inferredMetricsTieBreakers>
 </document>

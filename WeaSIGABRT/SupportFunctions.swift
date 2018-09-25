@@ -43,6 +43,9 @@ class SupportFunctions {
         group.enter()
         
         let point = WXKDarkSkyRequest.Point(latitude: latitude, longitude: longitude)
+        print("LAT LONG HERE")
+        print(latitude)
+        print(longitude)
         var temp:Double?
         DispatchQueue.global().async {
             request.loadData(point: point) { (data, error) in
@@ -77,9 +80,9 @@ class SupportFunctions {
         saveContext()
     }
     
-    static func fahrenheitToCelsius(temperature: Double) -> Int {
+    static func fahrenheitToCelsius(temperature: Double) -> Double {
         let celsiusTemperature = (temperature-32)*(5/9)
-        return Int(celsiusTemperature)
+        return celsiusTemperature
     }
     
     static func localTimeAtThatLocationCustom(time: Double, identifier: String, format: String) -> String {

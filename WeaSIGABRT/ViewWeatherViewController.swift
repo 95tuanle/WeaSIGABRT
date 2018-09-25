@@ -51,7 +51,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         currentScrollView.addSubview(featureView!)
         
         //Summon function up
-        updateCurrentWeatherLocation(location: city.name!)
+        updateCurrentWeatherLocation(lat: city.lat, long: city.long)
         
         //Add the custom Collection view cell to the Collection View
         let collectionNibName = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
@@ -68,101 +68,105 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //Populate the ViewWeather with Current Weather data
-    func updateCurrentWeatherLocation(location: String) {
-        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
-            if error == nil {
-                if let location = placemarks?.first?.location {
-                    ForecastService(APIKey: SupportFunctions.apiKey).getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, completion: { (currentWeather) in
-                        if let currentWeather = currentWeather {
-                            if let temperature = currentWeather.temperature {
-                                if SupportFunctions.isCelsius == true {
-                                    self.featureView?.temperatureLabel.text = String("\(SupportFunctions.fahrenheitToCelsius(temperature: temperature))˚")
-                                } else {
-                                    self.featureView?.temperatureLabel.text = String(format: "%.0f˚", temperature)
-                                }
-                            } else {
-                                self.featureView?.temperatureLabel.text = "--"
-                            }
-                            if let icon = currentWeather.icon {
-                                self.featureView?.iconLabel.text = SupportFunctions.emojiIcons[icon]
-                            } else {
-                                self.featureView?.iconLabel.text = "--"
-                            }
-                            if let humidity = currentWeather.humidity {
-                                self.featureView?.humidityLabel.text = String("\(humidity)%")
-                            } else {
-                                self.featureView?.humidityLabel.text = "--"
-                            }
-                            if let feels = currentWeather.apparentTemperature {
-                                if SupportFunctions.isCelsius == true {
-                                    self.featureView?.feelsLabel.text = String("\(SupportFunctions.fahrenheitToCelsius(temperature: feels))˚")
-                                } else {
-                                    self.featureView?.feelsLabel.text = String(format: "%.0f˚", feels)
-                                }
-                            } else {
-                                self.featureView?.feelsLabel.text = "--"
-                            }
-                            if let windSpd = currentWeather.windSpeed {
-                                if SupportFunctions.isMetric == true {
-                                    self.featureView?.windspeedLabel.text = String(format: "%.1f kph", windSpd*1.60934)
-                                } else {
-                                    self.featureView?.windspeedLabel.text = String(format: "%.1f mph", windSpd)
-                                }
-                            } else {
-                                self.featureView?.windspeedLabel.text = "--"
-                            }
-                            if let windGust = currentWeather.windGust {
-                                if SupportFunctions.isMetric == true {
-                                    self.featureView?.windgustLabel.text = String(format: "%.1f kph", windGust*1.60934)
-                                } else {
-                                    self.featureView?.windgustLabel.text = String(format: "%.1f mph", windGust)
-                                }
-                            } else {
-                                self.featureView?.windgustLabel.text = "--"
-                            }
-                            if let rainChance = currentWeather.rainChance {
-                                self.featureView?.rainchanceLabel.text = String(format: "%.0f", rainChance*100) + "%"
-                            } else {
-                                self.featureView?.rainchanceLabel.text = "--"
-                            }
-                            if let rainIntensity = currentWeather.rainIntensity {
-                                if SupportFunctions.isMetric == true {
-                                    self.featureView?.rainintensityLabel.text = String(format: "%.0f mm/h", rainIntensity*25.4)
-                                } else {
-                                    self.featureView?.rainintensityLabel.text = String(format: "%.0f inch/h", rainIntensity)
-                                }
-                            } else {
-                                self.featureView?.rainintensityLabel.text = "--"
-                            }
-                            if let UVIndex = currentWeather.uvIndex {
-                                self.featureView?.uvindexLabel.text = String(UVIndex)
-                            } else {
-                                self.featureView?.uvindexLabel.text = "--"
-                            }
-                            if let cloudCover = currentWeather.cloudCover {
-                                self.featureView?.cloudcoverLabel.text = String(format: "%.0f", cloudCover*100) + "%"
-                            } else {
-                                self.featureView?.cloudcoverLabel.text = "--"
-                            }
-                            if let visibility = currentWeather.visibility {
-                                if SupportFunctions.isMetric == true {
-                                    self.featureView?.visibilityLabel.text = String(format: "%.0f km", visibility*1.60934)
-                                } else {
-                                    self.featureView?.visibilityLabel.text = String(format: "%.0f miles", visibility)
-                                }
-                            } else {
-                                self.featureView?.visibilityLabel.text = "--"
-                            }
-                            if let pressure = currentWeather.pressure {
-                                self.featureView?.pressureLabel.text = String(format: "%.0f hPa", pressure)
-                            } else {
-                                self.featureView?.pressureLabel.text = "--"
-                            }
-                        }
-                    })
+    func updateCurrentWeatherLocation(lat: Double, long: Double) {
+//        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
+//            if error == nil {
+//                if let location = placemarks?.first?.location {
+//
+//                }
+//            }
+//        }
+        ForecastService(APIKey: SupportFunctions.apiKey).getCurrentWeather(latitude: lat, longitude: long, completion: { (currentWeather) in
+            print("AHYAGASD")
+            print(lat)
+            print(long)
+            if let currentWeather = currentWeather {
+                if let temperature = currentWeather.temperature {
+                    if SupportFunctions.isCelsius == true {
+                        self.featureView?.temperatureLabel.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: SupportFunctions.getCurrentTemperature(latitude: lat, longitude: long)))
+                    } else {
+                        self.featureView?.temperatureLabel.text = String(format: "%.0f", SupportFunctions.getCurrentTemperature(latitude: lat, longitude: long))
+                    }
+                } else {
+                    self.featureView?.temperatureLabel.text = "--"
+                }
+                if let icon = currentWeather.icon {
+                    self.featureView?.iconLabel.text = SupportFunctions.emojiIcons[icon]
+                } else {
+                    self.featureView?.iconLabel.text = "--"
+                }
+                if let humidity = currentWeather.humidity {
+                    self.featureView?.humidityLabel.text = String("\(humidity)%")
+                } else {
+                    self.featureView?.humidityLabel.text = "--"
+                }
+                if let feels = currentWeather.apparentTemperature {
+                    if SupportFunctions.isCelsius == true {
+                        self.featureView?.feelsLabel.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: feels))
+                    } else {
+                        self.featureView?.feelsLabel.text = String(format: "%.0f˚", feels)
+                    }
+                } else {
+                    self.featureView?.feelsLabel.text = "--"
+                }
+                if let windSpd = currentWeather.windSpeed {
+                    if SupportFunctions.isMetric == true {
+                        self.featureView?.windspeedLabel.text = String(format: "%.1f kph", windSpd*1.60934)
+                    } else {
+                        self.featureView?.windspeedLabel.text = String(format: "%.1f mph", windSpd)
+                    }
+                } else {
+                    self.featureView?.windspeedLabel.text = "--"
+                }
+                if let windGust = currentWeather.windGust {
+                    if SupportFunctions.isMetric == true {
+                        self.featureView?.windgustLabel.text = String(format: "%.1f kph", windGust*1.60934)
+                    } else {
+                        self.featureView?.windgustLabel.text = String(format: "%.1f mph", windGust)
+                    }
+                } else {
+                    self.featureView?.windgustLabel.text = "--"
+                }
+                if let rainChance = currentWeather.rainChance {
+                    self.featureView?.rainchanceLabel.text = String(format: "%.0f", rainChance*100) + "%"
+                } else {
+                    self.featureView?.rainchanceLabel.text = "--"
+                }
+                if let rainIntensity = currentWeather.rainIntensity {
+                    if SupportFunctions.isMetric == true {
+                        self.featureView?.rainintensityLabel.text = String(format: "%.0f mm/h", rainIntensity*25.4)
+                    } else {
+                        self.featureView?.rainintensityLabel.text = String(format: "%.0f inch/h", rainIntensity)
+                    }
+                } else {
+                    self.featureView?.rainintensityLabel.text = "--"
+                }
+                if let UVIndex = currentWeather.uvIndex {
+                    self.featureView?.uvindexLabel.text = String(UVIndex)
+                } else {
+                    self.featureView?.uvindexLabel.text = "--"
+                }
+                if let cloudCover = currentWeather.cloudCover {
+                    self.featureView?.cloudcoverLabel.text = String(format: "%.0f", cloudCover*100) + "%"
+                } else {
+                    self.featureView?.cloudcoverLabel.text = "--"
+                }
+                if let visibility = currentWeather.visibility {
+                    if SupportFunctions.isMetric == true {
+                        self.featureView?.visibilityLabel.text = String(format: "%.0f km", visibility*1.60934)
+                    } else {
+                        self.featureView?.visibilityLabel.text = String(format: "%.0f miles", visibility)
+                    }
+                } else {
+                    self.featureView?.visibilityLabel.text = "--"
+                }
+                if let pressure = currentWeather.pressure {
+                    self.featureView?.pressureLabel.text = String(format: "%.0f hPa", pressure)
+                } else {
+                    self.featureView?.pressureLabel.text = "--"
                 }
             }
-        }
+        })
     }
     
     //Populate the CollectionView in ViewWeather with Hourly Weather Data
