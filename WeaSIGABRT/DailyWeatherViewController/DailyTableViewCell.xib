@@ -63,7 +63,7 @@
                 <outlet property="dateLabel" destination="kRb-4n-AlW" id="U6b-PZ-JDo"/>
                 <outlet property="iconLabel" destination="nHk-pk-mBN" id="dMm-nL-Ffd"/>
                 <outlet property="temperatureLabel" destination="9pE-cl-WyU" id="7Wr-Ft-45u"/>
-                <outlet property="temperatureMinLabel" destination="hVE-4g-ezo" id="grT-xA-MkK"/>
+                <outlet property="temperatureMinLabel" destination="hVE-4g-ezo" id="tam-rZ-hQb"/>
             </connections>
             <point key="canvasLocation" x="129.59999999999999" y="153.82308845577214"/>
         </tableViewCell>
