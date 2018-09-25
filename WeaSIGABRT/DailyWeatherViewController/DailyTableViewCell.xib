@@ -18,36 +18,44 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRb-4n-AlW">
+                        <rect key="frame" x="16" y="11" width="95" height="38"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☀️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHk-pk-mBN">
+                        <rect key="frame" x="143.5" y="11" width="33" height="38"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="696˚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVE-4g-ezo">
+                        <rect key="frame" x="250" y="11" width="54" height="38"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="696˚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pE-cl-WyU">
-                        <rect key="frame" x="195.5" y="11" width="92.5" height="38"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRb-4n-AlW">
-                        <rect key="frame" x="32" y="11" width="111" height="38"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☀️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHk-pk-mBN">
-                        <rect key="frame" x="151" y="11" width="40" height="38"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                        <rect key="frame" x="187" y="11" width="54" height="38"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nHk-pk-mBN" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="HIw-nD-15M"/>
-                    <constraint firstItem="9pE-cl-WyU" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="YOL-Bw-nF5"/>
-                    <constraint firstItem="9pE-cl-WyU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Zvh-34-oj5"/>
-                    <constraint firstItem="kRb-4n-AlW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="cyd-dL-hkZ"/>
-                    <constraint firstItem="kRb-4n-AlW" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="ekC-Wt-e7m"/>
-                    <constraint firstItem="kRb-4n-AlW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gAU-AC-3v9"/>
-                    <constraint firstAttribute="trailing" secondItem="kRb-4n-AlW" secondAttribute="trailing" constant="177" id="iQw-f8-HUx"/>
-                    <constraint firstAttribute="trailing" secondItem="9pE-cl-WyU" secondAttribute="trailing" constant="32" id="j6x-wy-BdE"/>
-                    <constraint firstItem="nHk-pk-mBN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="pzk-Ef-wkV"/>
-                    <constraint firstAttribute="trailing" secondItem="nHk-pk-mBN" secondAttribute="trailing" constant="129" id="srw-YG-ADp"/>
+                    <constraint firstItem="kRb-4n-AlW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="80T-T8-OTF"/>
+                    <constraint firstItem="9pE-cl-WyU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="9dj-yQ-bjm"/>
+                    <constraint firstItem="nHk-pk-mBN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Gmj-Q9-yyg"/>
+                    <constraint firstAttribute="trailing" secondItem="hVE-4g-ezo" secondAttribute="trailing" constant="16" id="L8g-if-1m1"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="nHk-pk-mBN" secondAttribute="bottom" id="Tmp-17-cNw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="kRb-4n-AlW" secondAttribute="bottom" id="VTa-FR-keE"/>
+                    <constraint firstItem="hVE-4g-ezo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aCa-Ql-2XB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="9pE-cl-WyU" secondAttribute="bottom" id="bvJ-af-zFM"/>
+                    <constraint firstAttribute="trailing" secondItem="9pE-cl-WyU" secondAttribute="trailing" constant="79" id="dN8-NN-FOI"/>
+                    <constraint firstItem="kRb-4n-AlW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="lot-mw-TvO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hVE-4g-ezo" secondAttribute="bottom" id="mHT-qJ-7Pi"/>
+                    <constraint firstItem="nHk-pk-mBN" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ySz-j5-wxt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -55,6 +63,7 @@
                 <outlet property="dateLabel" destination="kRb-4n-AlW" id="U6b-PZ-JDo"/>
                 <outlet property="iconLabel" destination="nHk-pk-mBN" id="dMm-nL-Ffd"/>
                 <outlet property="temperatureLabel" destination="9pE-cl-WyU" id="7Wr-Ft-45u"/>
+                <outlet property="temperatureMinLabel" destination="hVE-4g-ezo" id="grT-xA-MkK"/>
             </connections>
             <point key="canvasLocation" x="129.59999999999999" y="153.82308845577214"/>
         </tableViewCell>
