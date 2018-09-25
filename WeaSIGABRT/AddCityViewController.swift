@@ -16,15 +16,12 @@
 import UIKit
 import MapKit
 import CoreData
-import CoreLocation
 
 class AddCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
     
     @IBOutlet weak var searchCity: UISearchBar!
     @IBOutlet weak var resultTable: UITableView!
     
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation!
     var results:[String] = []
     var internalResults:[MKLocalSearchCompletion] = []
     lazy var searchCompleter: MKLocalSearchCompleter = {
@@ -42,21 +39,6 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         searchCity.returnKeyType = UIReturnKeyType.done
         self.navigationItem.largeTitleDisplayMode = .never
         self.title = "Enter city"
-//        self.searchCity.text = "ALOHA"
-        if currentLocation != nil {
-            LocationManager.sharedInstance.getReverseGeoCodedLocation(location: currentLocation, completionHandler: { (location:CLLocation?, placemark:CLPlacemark?, error:NSError?) in
-                if error != nil {
-                    print((error?.localizedDescription)!)
-                    return
-                }
-                if placemark == nil {
-                    print("Location can't be fetched")
-                    return
-                }
-                
-                self.searchCity.text = placemark?.locality
-            })
-        }
         searchCity.becomeFirstResponder()
     }
     
