@@ -16,11 +16,14 @@
 import UIKit
 import CoreData
 import WXKDarkSky
+import CoreLocation
 
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var cities:[City] = []
     var selectedRow: Int!
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
 
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
@@ -63,15 +66,27 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         fetchData()
+        locationManager.requestWhenInUseAuthorization()
+        currentLocation = locationManager.location
+        print("AAAAAAAAAAAAAAAAAAAA")
+        print(currentLocation)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
+        print("BBBBBBBBBBBBBBBBBBBB")
+        print(currentLocation)
     }
     
     @objc func addCity() {
-        self.performSegue(withIdentifier: "Add City", sender: nil)
+        DispatchQueue.main.async {
+            print("CCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
+            print(self.currentLocation)
+            self.performSegue(withIdentifier: "Add City", sender: nil)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,6 +125,9 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
             let nav = segue.destination as! UINavigationController
             let detailCity = nav.topViewController as! ViewWeatherViewController
             detailCity.city = cities[selectedRow!]
+        } else if segue.identifier == "Add City" {
+            let addCity = segue.destination as! AddCityViewController
+            addCity.currentLocation = currentLocation
         }
     }
     
