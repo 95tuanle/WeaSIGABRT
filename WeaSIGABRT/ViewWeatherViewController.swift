@@ -27,7 +27,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
 
         configureEntryData(entry: city)
-//        navItem.title = city.name
         self.navigationItem.title = city.name
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
         
@@ -57,25 +56,18 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         let collectionNibName = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(collectionNibName, forCellWithReuseIdentifier: "hourlyCollectionViewCell")
         //Summon the function up, put into view did appear is to let the data to fetch from the web before display it - or it will out of range
-        updateHourlyWeatherLocation(location: city.name!)
+        updateHourlyWeatherLocation(lat: city.lat, long: city.long)
         
         //Add the custom cell to the Table View
         let tableviewNibName = UINib(nibName: "DailyTableViewCell", bundle: nil)
         dailyTableView.register(tableviewNibName, forCellReuseIdentifier: "dailyTableViewCell")
         //Kuchiyose no jutsu lul
-        updateDailyWeatherLocation(location: city.name!)
+        updateDailyWeatherLocation(lat: city.lat, long: city.long)
         
     }
     
     //Populate the ViewWeather with Current Weather data
     func updateCurrentWeatherLocation(lat: Double, long: Double) {
-//        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
-//            if error == nil {
-//                if let location = placemarks?.first?.location {
-//
-//                }
-//            }
-//        }
         ForecastService(APIKey: SupportFunctions.apiKey).getCurrentWeather(latitude: lat, longitude: long, completion: { (currentWeather) in
             print("AHYAGASD")
             print(lat)
@@ -170,21 +162,15 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //Populate the CollectionView in ViewWeather with Hourly Weather Data
-    func updateHourlyWeatherLocation(location: String) {
-        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
-            if error == nil {
-                if let location = placemarks?.first?.location {
-                    HourlyWeather.forecast(withKey: SupportFunctions.apiKey, withLocation: "\(location.coordinate.latitude),\(location.coordinate.longitude)", completion: { (results:[HourlyWeather]?) in
-                        if let weatherData = results {
-                            self.hourlyForecastData = weatherData
-                            DispatchQueue.main.async {
-                                self.hourlyCollectionView.reloadData()
-                            }
-                        }
-                    })
+    func updateHourlyWeatherLocation(lat: Double, long: Double) {
+        HourlyWeather.forecast(withKey: SupportFunctions.apiKey, withLocation: "\(lat),\(long)", completion: { (results:[HourlyWeather]?) in
+            if let weatherData = results {
+                self.hourlyForecastData = weatherData
+                DispatchQueue.main.async {
+                    self.hourlyCollectionView.reloadData()
                 }
             }
-        }
+        })
     }
     
     //Collection View style
@@ -212,21 +198,15 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //Populate the Table View in ViewWeather with Daily Weather data
-    func updateDailyWeatherLocation(location: String) {
-        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
-            if error == nil {
-                if let location = placemarks?.first?.location {
-                    DailyWeather.forecast(withKey: SupportFunctions.apiKey, withLocation: "\(location.coordinate.latitude),\(location.coordinate.longitude)", completion: { (results: [DailyWeather]?) in
-                        if let weatherData = results {
-                            self.dailyForecastData = weatherData
-                            DispatchQueue.main.async {
-                                self.dailyTableView.reloadData()
-                            }
-                        }
-                    })
+    func updateDailyWeatherLocation(lat: Double, long: Double) {
+        DailyWeather.forecast(withKey: SupportFunctions.apiKey, withLocation: "\(lat),\(long)", completion: { (results: [DailyWeather]?) in
+            if let weatherData = results {
+                self.dailyForecastData = weatherData
+                DispatchQueue.main.async {
+                    self.dailyTableView.reloadData()
                 }
             }
-        }
+        })
     }
     
     //Table View style
@@ -236,10 +216,10 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dailyTableView.dequeueReusableCell(withIdentifier: "dailyTableViewCell", for: indexPath) as! DailyTableViewCell
-        
+    
         let location = CLLocationCoordinate2D(latitude: city.lat, longitude: city.long)
         let timeZone = TimezoneMapper.latLngToTimezoneString(location)
-        let currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: dailyForecastData[indexPath.row].time, identifier: timeZone, format: "EEE dd-MM-yyyy")
+        let currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: dailyForecastData[indexPath.row].time, identifier: timeZone, format: "EEEE")
         
         featureView?.summaryLabel.text = dailyForecastData[0].summary
         

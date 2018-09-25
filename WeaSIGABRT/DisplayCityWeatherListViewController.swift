@@ -89,7 +89,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         if SupportFunctions.isCelsius {
             cell.temperature.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long)))
         } else {
-            cell.temperature.text = String(format: "%.0f", SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long))
+            cell.temperature.text = String(format: "%.0f˚", SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long))
         }
         return cell
     }
