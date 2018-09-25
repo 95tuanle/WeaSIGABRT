@@ -9,12 +9,14 @@
 import UIKit
 import CoreLocation
 import LatLongToTimezone
+import WXKDarkSky
 
 class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
     var city: City!
+    var dailyForecastData = [WXKDarkSkyResponse]()
     var hourlyForecastData = [HourlyWeather]()
-    var dailyForecastData = [DailyWeather]()
+    
     var summaryData = [DailyWeather]()
     var featureView = Bundle.main.loadNibNamed("Feature", owner: self, options: nil)?.first as? FeatureView
     
@@ -36,11 +38,18 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         dailyTableView.dataSource = self
         dailyTableView.delegate = self
         dailyTableView.allowsSelection = false
+        dailyTableView.tableFooterView = UIView()
+        
+        
     }
     
     
     @objc func dismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,8 +71,9 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         let tableviewNibName = UINib(nibName: "DailyTableViewCell", bundle: nil)
         dailyTableView.register(tableviewNibName, forCellReuseIdentifier: "dailyTableViewCell")
         //Kuchiyose no jutsu lul
-        updateDailyWeatherLocation(lat: city.lat, long: city.long)
-        
+        dailyForecastData = SupportFunctions.forecastAndTimeMachineQuery(city: city)
+//        print(dailyForecastData)
+        dailyTableView.reloadData()
     }
     
     //Populate the ViewWeather with Current Weather data
@@ -197,18 +207,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
-    //Populate the Table View in ViewWeather with Daily Weather data
-    func updateDailyWeatherLocation(lat: Double, long: Double) {
-        DailyWeather.forecast(withKey: SupportFunctions.apiKey, withLocation: "\(lat),\(long)", completion: { (results: [DailyWeather]?) in
-            if let weatherData = results {
-                self.dailyForecastData = weatherData
-                DispatchQueue.main.async {
-                    self.dailyTableView.reloadData()
-                }
-            }
-        })
-    }
-    
     //Table View style
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dailyForecastData.count
@@ -216,21 +214,31 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dailyTableView.dequeueReusableCell(withIdentifier: "dailyTableViewCell", for: indexPath) as! DailyTableViewCell
-    
+        let aDate = dailyForecastData[indexPath.row].currently
         let location = CLLocationCoordinate2D(latitude: city.lat, longitude: city.long)
         let timeZone = TimezoneMapper.latLngToTimezoneString(location)
-        let currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: dailyForecastData[indexPath.row].time, identifier: timeZone, format: "EEEE")
-        
-        featureView?.summaryLabel.text = dailyForecastData[0].summary
-        
-        var convertingTemperature = String()
-        if SupportFunctions.isCelsius == true {
-            convertingTemperature = String("\(Int(SupportFunctions.fahrenheitToCelsius(temperature: dailyForecastData[indexPath.row].temperature)))˚")
+        var currentLocalTime = String()
+        if indexPath.row == 7 {
+            currentLocalTime = "Today"
         } else {
-            convertingTemperature = String("\(Int(dailyForecastData[indexPath.row].temperature))˚")
+            currentLocalTime = SupportFunctions.localTimeAtThatLocationCustom(time: aDate!.time.timeIntervalSince1970, identifier: timeZone, format: "EEEE")
         }
         
-        cell.commonInit(date: currentLocalTime, temperature: convertingTemperature, icon: SupportFunctions.emojiIcons[dailyForecastData[indexPath.row].icon]!)
+        
+        featureView?.summaryLabel.text = dailyForecastData[7].daily!.data[0].summary
+        
+        var convertingTemperature = String()
+        if let temperature = aDate!.temperature {
+            if SupportFunctions.isCelsius == true {
+                convertingTemperature = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: temperature))
+            } else {
+                convertingTemperature = String(format: "%.0f˚", temperature)
+            }
+        } else {
+            convertingTemperature = "--˚"
+        }
+        
+        cell.commonInit(date: currentLocalTime, temperature: convertingTemperature, icon: SupportFunctions.emojiIcons[aDate!.icon!]!)
         
         return cell
     }

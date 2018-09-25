@@ -22,7 +22,9 @@ class SupportFunctions {
     
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
-    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
+//    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
+    static let request = WXKDarkSkyRequest(key: "9b43add4303def8ddb395cc7fec44be7")
+
     static let apiKey: String = "9b43add4303def8ddb395cc7fec44be7"
     static let emojiIcons = [
         "clear-day" : "☀️",
@@ -37,16 +39,21 @@ class SupportFunctions {
         "partly-cloudy-night" : "🌥"
     ]
     
-    static func forecastAndTimeMachineQuery(city:City) -> [WXKDarkSkyDataPoint] {
+    static func forecastAndTimeMachineQuery(city:City) -> [WXKDarkSkyResponse] {
         let point = WXKDarkSkyRequest.Point(latitude: city.lat, longitude: city.long)
-        var responses:[WXKDarkSkyDataPoint] = []
+        var responses:[WXKDarkSkyResponse] = []
         var dates:[Date] = []
         let today = Date()
-        for i in (2...7).reversed() {
+        for i in (1...7).reversed() {
             let yesterday = Calendar.current.date(byAdding: .day, value: -i, to: today)
             dates.append(yesterday!)
         }
-        let optionsCurrently = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .hourly, .daily, .minutely])
+        dates.append(today)
+        for i in 1...7 {
+            let tomorrow = Calendar.current.date(byAdding: .day, value: +i, to: today)
+            dates.append(tomorrow!)
+        }
+        let optionsCurrently = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .minutely])
         for date in dates {
             let group = DispatchGroup()
             group.enter()
@@ -55,40 +62,13 @@ class SupportFunctions {
                     if let error = error {
                         print(error)
                     } else if let data = data {
-                        responses.append(data.currently!)
+                        responses.append(data)
                         group.leave()
                     }
                 }
             }
             group.wait()
         }
-        let optionsDaily = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .hourly, .currently, .minutely])
-        let group = DispatchGroup()
-        group.enter()
-        DispatchQueue.global().async {
-            request.loadData(point: point, options: optionsDaily) { (data, error) in
-                if let error = error {
-                    print(error)
-                } else if let data = data {
-                    responses = responses + data.daily!.data
-                    group.leave()
-                }
-            }
-        }
-        group.wait()
-        let group2 = DispatchGroup()
-        group2.enter()
-        DispatchQueue.global().async {
-            request.loadData(point: point, time: Calendar.current.date(byAdding: .day, value: +7, to: today), options: optionsCurrently) { (data, error) in
-                if let error = error {
-                    print(error)
-                } else if let data = data {
-                    responses.append(data.currently!)
-                    group2.leave()
-                }
-            }
-        }
-        group2.wait()
         return responses
     }
     
