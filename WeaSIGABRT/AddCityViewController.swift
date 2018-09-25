@@ -56,17 +56,13 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         //        let searchRequest = MKLocalSearch.Request(completion: internalResults[indexPath.row])
         //        let search = MKLocalSearch(request: searchRequest)
         //        search.start { (response, error) in
-
-
         MKLocalSearch(request: MKLocalSearch.Request(completion: internalResults[indexPath.row])).start { (response, error) in
             let mapItem = response?.mapItems[0]
             let coordinate = mapItem?.placemark.coordinate
-            
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
             let predicate = NSPredicate(format: "name == %@", (mapItem?.name)!)
             request.predicate = predicate
             request.fetchLimit = 1
-            
             do {
                 let count = try SupportFunctions.createContext().count(for: request)
                 DispatchQueue.main.async {

@@ -21,36 +21,23 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     var cities:[City] = []
     var selectedRow: Int!
+    var oldButtons:[UIBarButtonItem] = []
 
     @IBOutlet weak var cityTable: UITableView!
-    @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
-    @IBAction func metricSwitch(_ sender: Any) {
-        switch SupportFunctions.isMetric {
-        case true:
-            metricSwitchLabel.title = "Imperial"
-            SupportFunctions.isMetric = false
-//            print("Switching to Imperial System")
-        case false:
-            metricSwitchLabel.title = "Metric"
-            SupportFunctions.isMetric = true
-//            print("Switching to Metric System")
-        }
-    }
     @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
     @IBAction func temperatureSwitch(_ sender: Any) {
         switch SupportFunctions.isCelsius {
         case true:
             temperatureSwitchLabel.title = "˚F"
             SupportFunctions.isCelsius = false
-//            print("Switching to F")
             cityTable.reloadData()
         case false:
             temperatureSwitchLabel.title = "˚C"
             SupportFunctions.isCelsius = true
-//            print("Switching to C")
             cityTable.reloadData()
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +50,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         fetchData()
+        oldButtons = self.navigationItem.rightBarButtonItems!
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,9 +95,12 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     //Pass data from table view to View/Edit through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail City" {
-            let nav = segue.destination as! UINavigationController
-            let detailCity = nav.topViewController as! ViewWeatherViewController
-            detailCity.city = cities[selectedRow!]
+//            let nav = segue.destination as! UINavigationController
+//            let detailCity = nav.topViewController as! ViewWeatherViewController
+            let detailCity: ViewWeatherViewController = segue.destination as! ViewWeatherViewController
+            let city = cities[selectedRow!]
+            detailCity.city = city
+            detailCity.response = SupportFunctions.getCurrentWeather(latitude: city.lat, longitude: city.long)
         }
     }
     
@@ -125,10 +116,11 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         cityTable.setEditing(editing, animated: animated)
+        
         if editing {
-            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.rightBarButtonItems = nil
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
+            self.navigationItem.rightBarButtonItems = oldButtons
         }
     }
     
