@@ -15,9 +15,9 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
 
     var city: City!
     var dailyForecastData = [WXKDarkSkyDataPoint]()
+    
     var hourlyForecastData = [HourlyWeather]()
     
-    var summaryData = [DailyWeather]()
     var featureView = Bundle.main.loadNibNamed("Feature", owner: self, options: nil)?.first as? FeatureView
     
 //    @IBOutlet weak var navItem: UINavigationItem!
@@ -78,6 +78,8 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //Populate the ViewWeather with Current Weather data
     func updateCurrentWeatherLocation(lat: Double, long: Double) {
+        let abc:WXKDarkSkyResponse = SupportFunctions.getCurrentWeather(latitude: lat, longitude: long)
+        
         ForecastService(APIKey: SupportFunctions.apiKey).getCurrentWeather(latitude: lat, longitude: long, completion: { (currentWeather) in
             print("AHYAGASD")
             print(lat)
