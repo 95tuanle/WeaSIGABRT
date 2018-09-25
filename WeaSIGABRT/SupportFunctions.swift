@@ -101,6 +101,26 @@ class SupportFunctions {
         return temp!
     }
     
+    static func getCurrentWeather(latitude: Double, longitude: Double) -> WXKDarkSkyResponse {
+        let group = DispatchGroup()
+        group.enter()
+        let point = WXKDarkSkyRequest.Point(latitude: latitude, longitude: longitude)
+        var temp:WXKDarkSkyResponse?
+        DispatchQueue.global().async {
+            request.loadData(point: point) { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    temp = data
+                    group.leave()
+                }
+            }
+        }
+        
+        group.wait()
+        return temp!
+    }
+    
     static func createContext() -> NSManagedObjectContext {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
