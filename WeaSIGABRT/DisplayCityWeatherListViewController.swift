@@ -45,6 +45,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         cityTable.dataSource = self
         cityTable.delegate = self
         self.title = "WeaSIGABRT"
+        self.cityTable.separatorColor = .clear
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
@@ -79,11 +80,13 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let city = cities[indexPath.row]
+        let current = SupportFunctions.getCurrentWeather(latitude: city.lat, longitude: city.long).currently
         let imageView = UIImageView(frame: cell.frame)
         imageView.center = cell.center
         imageView.frame.size = cell.frame.size
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "cloudy")
+        imageView.tintColor = .black
+        imageView.image = UIImage(named: (current?.icon)!)
         cell.backgroundView = imageView
         cell.placeName.text = city.name
         let dateFormatter = DateFormatter()
@@ -91,9 +94,9 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         dateFormatter.timeZone = city.timeZone
         cell.localTime.text = dateFormatter.string(from: Date())
         if SupportFunctions.isCelsius {
-            cell.temperature.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long)))
+            cell.temperature.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: (current?.temperature)!))
         } else {
-            cell.temperature.text = String(format: "%.0f˚", SupportFunctions.getCurrentTemperature(latitude: city.lat, longitude: city.long))
+            cell.temperature.text = String(format: "%.0f˚", (current?.temperature)!)
         }
         return cell
     }

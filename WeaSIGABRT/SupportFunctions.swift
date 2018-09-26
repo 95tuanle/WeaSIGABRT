@@ -79,26 +79,6 @@ class SupportFunctions {
         return responses
     }
     
-    static func getCurrentTemperature(latitude: Double, longitude: Double) -> Double {
-        let group = DispatchGroup()
-        group.enter()
-        let point = WXKDarkSkyRequest.Point(latitude: latitude, longitude: longitude)
-        var temp:Double?
-        DispatchQueue.global().async {
-            request.loadData(point: point) { (data, error) in
-                if let error = error {
-                    print(error)
-                } else if let data = data {
-                    temp = (data.currently!.temperature)!
-                    group.leave()
-                }
-            }
-        }
-        
-        group.wait()
-        return temp!
-    }
-    
     static func getCurrentWeather(latitude: Double, longitude: Double) -> WXKDarkSkyResponse {
         let group = DispatchGroup()
         group.enter()

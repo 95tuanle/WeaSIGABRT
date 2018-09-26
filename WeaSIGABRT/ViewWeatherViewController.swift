@@ -18,6 +18,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     var timeMachineAndForecastWeatherData = [WXKDarkSkyDataPoint]()
     var featureView = Bundle.main.loadNibNamed("Feature", owner: self, options: nil)?.first as? FeatureView
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var currentScrollView: UIScrollView!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
@@ -92,6 +93,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         dailyTableView.dataSource = self
         dailyTableView.delegate = self
         dailyTableView.allowsSelection = false
+        dailyTableView.separatorColor = .clear
         dailyTableView.tableFooterView = UIView()
         //Add the custom Collection view cell to the Collection View
         let collectionNibName = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
@@ -100,6 +102,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         let tableviewNibName = UINib(nibName: "DailyTableViewCell", bundle: nil)
         dailyTableView.register(tableviewNibName, forCellReuseIdentifier: "dailyTableViewCell")
         updateCurrentWeather(response: response)
+        backgroundImage.image = UIImage(named: (response.currently?.icon)!)
     }
     
     @objc func dismiss(_ sender: Any) {
