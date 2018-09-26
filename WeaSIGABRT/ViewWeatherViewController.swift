@@ -96,7 +96,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             if SupportFunctions.isCelsius == true {
                 self.featureView?.temperatureLabel.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: (response.currently?.temperature)!))
             } else {
-                self.featureView?.temperatureLabel.text = String(format: "%.0f", (response.currently?.temperature)!)
+                self.featureView?.temperatureLabel.text = String(format: "%.0f˚", (response.currently?.temperature)!)
             }
         } else {
             self.featureView?.temperatureLabel.text = "--"
@@ -107,7 +107,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             self.featureView?.iconLabel.text = "--"
         }
         if let humidity = meh?.humidity {
-            self.featureView?.humidityLabel.text = String("\(humidity)%")
+            self.featureView?.humidityLabel.text = String(format: "%.0f", humidity*100) + "%"
         } else {
             self.featureView?.humidityLabel.text = "--"
         }
@@ -196,7 +196,15 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             convertingTemperature = String("\(Int(aHour!.temperature!))˚")
         }
-        cell.commonInit(time: currentLocalTime, temperature: convertingTemperature, icon: SupportFunctions.emojiIcons[aHour!.icon!]!)
+        
+        var currentTime = String()
+        if indexPath.row == 0 {
+            currentTime = "Now"
+        } else {
+            currentTime = currentLocalTime
+        }
+        
+        cell.commonInit(time: currentTime, temperature: convertingTemperature, icon: SupportFunctions.emojiIcons[aHour!.icon!]!)
         return cell
     }
     
