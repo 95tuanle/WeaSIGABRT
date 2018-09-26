@@ -58,6 +58,33 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switch SupportFunctions.isMetric {
+        case true:
+            metricSwitchLabel.title = "Metric"
+//            SupportFunctions.isMetric = false
+            updateCurrentWeather(response: response)
+        case false:
+            metricSwitchLabel.title = "Imperial"
+//            SupportFunctions.isMetric = true
+            updateCurrentWeather(response: response)
+        }
+        switch SupportFunctions.isCelsius {
+        case true:
+            temperatureSwitchLabel.title = "˚C"
+//            SupportFunctions.isCelsius = false
+            updateCurrentWeather(response: response)
+            dailyTableView.reloadData()
+            hourlyCollectionView.reloadData()
+            featureView?.reloadInputViews()
+            
+        case false:
+            temperatureSwitchLabel.title = "˚F"
+//            SupportFunctions.isCelsius = true
+            updateCurrentWeather(response: response)
+            dailyTableView.reloadData()
+            hourlyCollectionView.reloadData()
+            featureView?.reloadInputViews()
+        }
         self.navigationItem.title = city.name
 //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
         hourlyCollectionView.dataSource = self

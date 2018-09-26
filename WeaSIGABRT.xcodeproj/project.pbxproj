@@ -75,9 +75,9 @@
 		136125DC2158C2FA005D75C9 /* HourlyWeatherViewController */ = {
 			isa = PBXGroup;
 			children = (
+				136125DA2158C2F0005D75C9 /* HourlyCollectionViewCell.xib */,
 				136125DD2158D668005D75C9 /* HourlyCollectionViewCell.swift */,
 				136125DF2158D918005D75C9 /* HourlyWeather.swift */,
-				136125DA2158C2F0005D75C9 /* HourlyCollectionViewCell.xib */,
 			);
 			path = HourlyWeatherViewController;
 			sourceTree = "<group>";
@@ -133,10 +133,10 @@
 		9B2939662158C39B00799E40 /* CurrentWeatherViewController */ = {
 			isa = PBXGroup;
 			children = (
-				9B2939672158C3B300799E40 /* CurrentWeather.swift */,
-				9B29396A2158C3B300799E40 /* ForecastService.swift */,
 				9B2939682158C3B300799E40 /* Feature.xib */,
 				9B2939692158C3B300799E40 /* FeatureView.swift */,
+				9B2939672158C3B300799E40 /* CurrentWeather.swift */,
+				9B29396A2158C3B300799E40 /* ForecastService.swift */,
 			);
 			path = CurrentWeatherViewController;
 			sourceTree = "<group>";
@@ -441,7 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N8955PM583;
 				INFOPLIST_FILE = WeaSIGABRT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,7 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N8955PM583;
 				INFOPLIST_FILE = WeaSIGABRT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

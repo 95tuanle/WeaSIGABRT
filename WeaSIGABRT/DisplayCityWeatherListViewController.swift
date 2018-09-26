@@ -38,9 +38,9 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         cityTable.tableFooterView = UIView()
         cityTable.dataSource = self
         cityTable.delegate = self
@@ -55,6 +55,16 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        switch SupportFunctions.isCelsius {
+        case true:
+            temperatureSwitchLabel.title = "˚C"
+            //            SupportFunctions.isCelsius = false
+            cityTable.reloadData()
+        case false:
+            temperatureSwitchLabel.title = "˚F"
+            //            SupportFunctions.isCelsius = true
+            cityTable.reloadData()
+        }
         fetchData()
     }
     

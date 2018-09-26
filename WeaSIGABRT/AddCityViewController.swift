@@ -36,11 +36,16 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         resultTable.dataSource = self
         resultTable.delegate = self
         searchCity.delegate = self
-        searchCity.returnKeyType = UIReturnKeyType.done
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(abc))
+        searchCity.returnKeyType = UIReturnKeyType.search
         self.navigationItem.largeTitleDisplayMode = .never
         self.title = "Enter city"
         searchCity.becomeFirstResponder()
     }
+    
+//    @objc func abc() {
+//        self.searchCity.text = "My Location"
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
