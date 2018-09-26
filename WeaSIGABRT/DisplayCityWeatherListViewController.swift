@@ -79,6 +79,12 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let city = cities[indexPath.row]
+        let imageView = UIImageView(frame: cell.frame)
+        imageView.center = cell.center
+        imageView.frame.size = cell.frame.size
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "cloudy")
+        cell.backgroundView = imageView
         cell.placeName.text = city.name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"

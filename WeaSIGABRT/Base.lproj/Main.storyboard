@@ -36,9 +36,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b9u-r0-7XN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---˚" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcN-j4-jN8">
                                                     <rect key="frame" x="269.5" y="14" width="90.5" height="56"/>
                                                     <constraints>
@@ -47,8 +44,9 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="uVB-XB-369"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----------------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="407-er-ing">
                                                     <rect key="frame" x="15" y="45" width="163" height="27.5"/>
@@ -57,8 +55,9 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27.5" id="ohG-W5-LCL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDK-i1-bta">
                                                     <rect key="frame" x="15" y="14" width="41" height="20"/>
@@ -66,25 +65,22 @@
                                                         <constraint firstAttribute="height" constant="20" id="FZ8-yb-z6u"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="b9u-r0-7XN" firstAttribute="leading" secondItem="9Gd-kc-Nr1" secondAttribute="leading" id="9Yv-Hj-sme"/>
                                                 <constraint firstItem="407-er-ing" firstAttribute="top" secondItem="GDK-i1-bta" secondAttribute="bottom" constant="11" id="DhQ-qF-Zwz"/>
                                                 <constraint firstItem="vcN-j4-jN8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GDK-i1-bta" secondAttribute="trailing" constant="8" symbolic="YES" id="M6y-jW-5Yb"/>
                                                 <constraint firstItem="GDK-i1-bta" firstAttribute="top" secondItem="9Gd-kc-Nr1" secondAttribute="top" constant="14" id="PbL-25-9Mt"/>
                                                 <constraint firstAttribute="bottom" secondItem="407-er-ing" secondAttribute="bottom" constant="13" id="TCg-2G-OW7"/>
-                                                <constraint firstItem="b9u-r0-7XN" firstAttribute="top" secondItem="9Gd-kc-Nr1" secondAttribute="top" id="Y0K-vw-Rga"/>
                                                 <constraint firstAttribute="bottom" secondItem="vcN-j4-jN8" secondAttribute="bottom" constant="15.5" id="a9w-Oj-yez"/>
                                                 <constraint firstAttribute="trailing" secondItem="vcN-j4-jN8" secondAttribute="trailing" constant="15" id="aWa-qs-p7a"/>
                                                 <constraint firstItem="407-er-ing" firstAttribute="top" secondItem="GDK-i1-bta" secondAttribute="bottom" constant="11" id="anv-is-zvq"/>
                                                 <constraint firstItem="407-er-ing" firstAttribute="leading" secondItem="9Gd-kc-Nr1" secondAttribute="leading" constant="15" id="dwM-0p-4R7"/>
-                                                <constraint firstAttribute="bottom" secondItem="b9u-r0-7XN" secondAttribute="bottom" id="eZA-vd-9rx"/>
                                                 <constraint firstItem="vcN-j4-jN8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="407-er-ing" secondAttribute="trailing" constant="8" symbolic="YES" id="gYj-mg-bVd"/>
                                                 <constraint firstItem="vcN-j4-jN8" firstAttribute="top" secondItem="9Gd-kc-Nr1" secondAttribute="top" constant="14" id="ohk-Fr-8QL"/>
-                                                <constraint firstAttribute="trailing" secondItem="b9u-r0-7XN" secondAttribute="trailing" id="viK-HY-hcd"/>
                                                 <constraint firstItem="GDK-i1-bta" firstAttribute="leading" secondItem="9Gd-kc-Nr1" secondAttribute="leading" constant="15" id="yPI-ag-fhC"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -125,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYk-y4-B9z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="131.78410794602701"/>
+            <point key="canvasLocation" x="1078.125" y="132.04225352112675"/>
         </scene>
         <!--Add City View Controller-->
         <scene sceneID="YRf-Vq-nlM">
