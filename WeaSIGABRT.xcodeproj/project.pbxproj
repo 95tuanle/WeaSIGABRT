@@ -223,20 +223,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/LatLongToTimezone/LatLongToTimezone.framework",
 				"${BUILT_PRODUCTS_DIR}/WXKDarkSky/WXKDarkSky.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LatLongToTimezone.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WXKDarkSky.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeaSIGABRT/Pods-WeaSIGABRT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D4D9DFC59AB1F77692F02ADA /* [CP] Check Pods Manifest.lock */ = {

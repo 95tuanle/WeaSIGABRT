@@ -5,10 +5,8 @@ target 'WeaSIGABRT' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'WXKDarkSky', '~> 2.2.0'
-  pod 'LatLongToTimezone'
-#  pod 'Alamofire'
-
   # Pods for WeaSIGABRT
+	pod 'WXKDarkSky', '~> 2.2.0'
+	pod 'LatLongToTimezone'
 
 end

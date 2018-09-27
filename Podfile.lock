@@ -1,24 +1,20 @@
 PODS:
-  - Alamofire (4.7.3)
   - LatLongToTimezone (1.1.2)
   - WXKDarkSky (2.2.0)
 
 DEPENDENCIES:
-  - Alamofire
   - LatLongToTimezone
   - WXKDarkSky (~> 2.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - LatLongToTimezone
     - WXKDarkSky
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   LatLongToTimezone: efd39e80e92c4cd3aefb597a2fd16f177a4742b5
   WXKDarkSky: d532c1fc3b3071fd7136c1ae3c78dc23e50a78f9
 
-PODFILE CHECKSUM: fb20c29966a3c43e723fe72c74796baf369609dc
+PODFILE CHECKSUM: 7bbebdf51df3c2977be8f58ddb2fc5f2e49edf2b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1
