@@ -18,6 +18,8 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     var timeMachineAndForecastWeatherData = [WXKDarkSkyDataPoint]()
     var featureView = Bundle.main.loadNibNamed("Feature", owner: self, options: nil)?.first as? FeatureView
     
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var currentScrollView: UIScrollView!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
@@ -59,20 +61,23 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup a blur screen to wait for loading forecast data
+        loadingView.alpha = 1.0
+        loadingLabel.alpha = 1.0
+        loadingView.blurView.setup(style: UIBlurEffect.Style.light, alpha: 0.9).enable()
+        
         switch SupportFunctions.isMetric {
         case true:
             metricSwitchLabel.title = "Metric"
-//            SupportFunctions.isMetric = false
             updateCurrentWeather(response: response)
         case false:
             metricSwitchLabel.title = "Imperial"
-//            SupportFunctions.isMetric = true
             updateCurrentWeather(response: response)
         }
         switch SupportFunctions.isCelsius {
         case true:
             temperatureSwitchLabel.title = "˚C"
-//            SupportFunctions.isCelsius = false
             updateCurrentWeather(response: response)
             dailyTableView.reloadData()
             hourlyCollectionView.reloadData()
@@ -80,7 +85,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             
         case false:
             temperatureSwitchLabel.title = "˚F"
-//            SupportFunctions.isCelsius = true
             updateCurrentWeather(response: response)
             dailyTableView.reloadData()
             hourlyCollectionView.reloadData()
@@ -110,6 +114,8 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        loadingView.alpha = 0.0
+        loadingLabel.alpha = 0.0
         //Config to make the xib width to fit with scrollview/screen width
         featureView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 500)
         currentScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: (featureView?.frame.size.height)! + 30)
