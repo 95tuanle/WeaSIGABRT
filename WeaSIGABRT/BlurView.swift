@@ -1,10 +1,18 @@
-//  Source: https://github.com/romansorochak/Blur
-//  UIView+Blur.swift
-//  Blur
-//
-//  Created by Roman Sorochak <roman.sorochak@gmail.com> on 6/27/17.
-//  Copyright © 2017 MagicLab. All rights reserved.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2018B
+ Assessment: Project
+ Author:
+ -   Ngo Vu Nguyen (s3480522)
+ -   Le Pham Ngoc Hoai (s3636085)
+ -   Le Nguyen Anh Tuan (s3574983)
+ -   Mai Pham Quang Huy (s3618861)
+ ID: s3480522,s3636085, s3574983, s3618861
+ Created date: 18/9/2018
+ Acknowledgment:
+ */
+
 import UIKit
 
 extension UIView {

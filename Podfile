@@ -6,8 +6,8 @@ target 'WeaSIGABRT' do
   use_frameworks!
 
   pod 'WXKDarkSky', '~> 2.2.0'
-  pod 'Alamofire'
   pod 'LatLongToTimezone'
+#  pod 'Alamofire'
 
   # Pods for WeaSIGABRT
 
