@@ -68,6 +68,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //Setup a blur screen to wait for loading forecast data
         loadingView.alpha = 1.0
         loadingLabel.alpha = 1.0

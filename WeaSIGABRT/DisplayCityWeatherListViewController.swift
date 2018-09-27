@@ -41,6 +41,12 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]//user global variable
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent //user global variable
+        self.navigationController?.navigationBar.tintColor = UIColor.white //user global variable
+        self.cityTable.backgroundColor = UIColor.darkGray //user global variable
+        
         cityTable.tableFooterView = UIView()
         cityTable.dataSource = self
         cityTable.delegate = self
