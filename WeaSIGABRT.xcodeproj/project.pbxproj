@@ -44,7 +44,7 @@
 		9B2939682158C3B300799E40 /* Feature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Feature.xib; sourceTree = "<group>"; };
 		9B2939692158C3B300799E40 /* FeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		9B2939702158D61800799E40 /* ViewWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWeatherViewController.swift; sourceTree = "<group>"; };
-		9B29397C2159547700799E40 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyTableViewCell.swift; path = "../../../Weather-app/Interface/DailyWeatherViewController/DailyTableViewCell.swift"; sourceTree = "<group>"; };
+		9B29397C2159547700799E40 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		9BF7C4FD215CA2890091EC91 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		A6A10245169B38F773D6B905 /* Pods_WeaSIGABRT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeaSIGABRT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8A9F612158DAF7002D710A /* DailyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
