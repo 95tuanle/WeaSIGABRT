@@ -34,11 +34,10 @@ import CoreData
 import WXKDarkSky
 
 class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     var cities:[City] = []
     var selectedRow: Int!
     var oldButtons:[UIBarButtonItem] = []
-
+    
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var temperatureSwitchLabel: UIBarButtonItem!
     @IBAction func temperatureSwitch(_ sender: Any) {
@@ -56,23 +55,22 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]//user global variable
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent //user global variable
-        self.navigationController?.navigationBar.tintColor = UIColor.white //user global variable
-        self.cityTable.backgroundColor = UIColor.darkGray //user global variable
-        
-        cityTable.tableFooterView = UIView()
-        cityTable.dataSource = self
-        cityTable.delegate = self
+        //Config UI
+        self.view.backgroundColor = UIColor.black
         self.title = "WeaSIGABRT"
-        self.cityTable.separatorColor = .clear
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        fetchData()
+        cityTable.separatorColor = .clear
+        cityTable.tableFooterView = UIView()
+        cityTable.dataSource = self
+        cityTable.delegate = self
+        cityTable.backgroundColor = UIColor.black
         oldButtons = self.navigationItem.rightBarButtonItems!
     }
     
@@ -81,11 +79,9 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
         switch SupportFunctions.isCelsius {
         case true:
             temperatureSwitchLabel.title = "˚C"
-            //            SupportFunctions.isCelsius = false
             cityTable.reloadData()
         case false:
             temperatureSwitchLabel.title = "˚F"
-            //            SupportFunctions.isCelsius = true
             cityTable.reloadData()
         }
         fetchData()
@@ -102,6 +98,7 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let city = cities[indexPath.row]
+        //Get current weather
         let current = SupportFunctions.getCurrentWeather(latitude: city.lat, longitude: city.long).currently
         let imageView = UIImageView(frame: cell.frame)
         imageView.center = cell.center
@@ -136,8 +133,6 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     //Pass data from table view to View/Edit through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail City" {
-//            let nav = segue.destination as! UINavigationController
-//            let detailCity = nav.topViewController as! ViewWeatherViewController
             let detailCity: ViewWeatherViewController = segue.destination as! ViewWeatherViewController
             let city = cities[selectedRow!]
             detailCity.city = city
@@ -157,7 +152,6 @@ class DisplayCityWeatherListViewController: UIViewController, UITableViewDataSou
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         cityTable.setEditing(editing, animated: animated)
-        
         if editing {
             self.navigationItem.rightBarButtonItems = nil
         } else {

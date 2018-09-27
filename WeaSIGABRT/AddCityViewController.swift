@@ -34,10 +34,6 @@ import MapKit
 import CoreData
 
 class AddCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
-    
-    @IBOutlet weak var searchCity: UISearchBar!
-    @IBOutlet weak var resultTable: UITableView!
-    
     var results:[String] = []
     var internalResults:[MKLocalSearchCompletion] = []
     lazy var searchCompleter: MKLocalSearchCompleter = {
@@ -46,23 +42,23 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
         return searchCompleter
     }()
     
+    @IBOutlet weak var searchCity: UISearchBar!
+    @IBOutlet weak var resultTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultTable.backgroundColor = UIColor.darkGray
+        //Config UI
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.title = "Enter city"
+        self.view.backgroundColor = UIColor.black
+        resultTable.backgroundColor = UIColor.black
         resultTable.tableFooterView = UIView()
         resultTable.dataSource = self
         resultTable.delegate = self
         searchCity.delegate = self
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(abc))
         searchCity.returnKeyType = UIReturnKeyType.search
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.title = "Enter city"
         searchCity.becomeFirstResponder()
     }
-    
-//    @objc func abc() {
-//        self.searchCity.text = "My Location"
-//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -75,9 +71,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let searchRequest = MKLocalSearch.Request(completion: internalResults[indexPath.row])
-        //        let search = MKLocalSearch(request: searchRequest)
-        //        search.start { (response, error) in
+        //Taking the location and save it to Core Data
         MKLocalSearch(request: MKLocalSearch.Request(completion: internalResults[indexPath.row])).start { (response, error) in
             let mapItem = response?.mapItems[0]
             let coordinate = mapItem?.placemark.coordinate
@@ -112,7 +106,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.resultTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = UIColor.darkGray
+        cell.backgroundColor = UIColor.black
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.text = self.results[indexPath.row]
         return cell

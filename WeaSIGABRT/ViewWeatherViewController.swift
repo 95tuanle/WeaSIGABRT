@@ -35,7 +35,6 @@ import LatLongToTimezone
 import WXKDarkSky
 
 class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
-
     var city: City!
     var response:WXKDarkSkyResponse!
     var timeMachineAndForecastWeatherData = [WXKDarkSkyDataPoint]()
@@ -47,7 +46,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var currentScrollView: UIScrollView!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
-    
     @IBOutlet weak var metricSwitchLabel: UIBarButtonItem!
     @IBAction func metricSwitch(_ sender: Any) {
         switch SupportFunctions.isMetric {
@@ -84,12 +82,12 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Config UI
+        self.navigationItem.title = city.name
         //Setup a blur screen to wait for loading forecast data
         loadingView.alpha = 1.0
         loadingLabel.alpha = 1.0
         loadingView.blurView.setup(style: UIBlurEffect.Style.light, alpha: 0.9).enable()
-        
         switch SupportFunctions.isMetric {
         case true:
             metricSwitchLabel.title = "Metric"
@@ -105,7 +103,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             dailyTableView.reloadData()
             hourlyCollectionView.reloadData()
             featureView?.reloadInputViews()
-            
         case false:
             temperatureSwitchLabel.title = "˚F"
             updateCurrentWeather(response: response)
@@ -113,8 +110,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
             hourlyCollectionView.reloadData()
             featureView?.reloadInputViews()
         }
-        self.navigationItem.title = city.name
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
         hourlyCollectionView.dataSource = self
         hourlyCollectionView.delegate = self
         dailyTableView.dataSource = self
@@ -128,7 +123,6 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         //Add the custom cell to the Table View
         let tableviewNibName = UINib(nibName: "DailyTableViewCell", bundle: nil)
         dailyTableView.register(tableviewNibName, forCellReuseIdentifier: "dailyTableViewCell")
-        updateCurrentWeather(response: response)
         backgroundImage.image = UIImage(named: (response.currently?.icon)!)
     }
     
@@ -137,21 +131,24 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //Config UI
         loadingView.alpha = 0.0
         loadingLabel.alpha = 0.0
         //Config to make the xib width to fit with scrollview/screen width
         featureView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 500)
         currentScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: (featureView?.frame.size.height)! + 30)
         currentScrollView.addSubview(featureView!)
-        //Kuchiyose no jutsu lul
+        //Get Weather Data
+        updateCurrentWeather(response: response)
         timeMachineAndForecastWeatherData = SupportFunctions.forecastAndTimeMachineQuery(city: city)
         dailyTableView.reloadData()
     }
     
     //Populate the ViewWeather with Current Weather data
     func updateCurrentWeather(response: WXKDarkSkyResponse) {
-        let meh = response.currently
-        if (meh?.temperature) != nil {
+        //Display Current Weather
+        let current = response.currently
+        if (current?.temperature) != nil {
             if SupportFunctions.isCelsius == true {
                 self.featureView?.temperatureLabel.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: (response.currently?.temperature)!))
             } else {
@@ -160,17 +157,17 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.temperatureLabel.text = "--"
         }
-        if let icon = meh?.icon {
+        if let icon = current?.icon {
             self.featureView?.iconLabel.text = SupportFunctions.emojiIcons[icon]
         } else {
             self.featureView?.iconLabel.text = "--"
         }
-        if let humidity = meh?.humidity {
+        if let humidity = current?.humidity {
             self.featureView?.humidityLabel.text = String(format: "%.0f", humidity*100) + "%"
         } else {
             self.featureView?.humidityLabel.text = "--"
         }
-        if let feels = meh?.apparentTemperature {
+        if let feels = current?.apparentTemperature {
             if SupportFunctions.isCelsius == true {
                 self.featureView?.feelsLabel.text = String(format: "%.0f˚", SupportFunctions.fahrenheitToCelsius(temperature: feels))
             } else {
@@ -179,7 +176,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.feelsLabel.text = "--"
         }
-        if let windSpd = meh?.windSpeed {
+        if let windSpd = current?.windSpeed {
             if SupportFunctions.isMetric == true {
                 self.featureView?.windspeedLabel.text = String(format: "%.1f kph", windSpd*1.60934)
             } else {
@@ -188,7 +185,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.windspeedLabel.text = "--"
         }
-        if let windGust = meh?.windGust {
+        if let windGust = current?.windGust {
             if SupportFunctions.isMetric == true {
                 self.featureView?.windgustLabel.text = String(format: "%.1f kph", windGust*1.60934)
             } else {
@@ -197,12 +194,12 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.windgustLabel.text = "--"
         }
-        if let rainChance = meh?.precipProbability {
+        if let rainChance = current?.precipProbability {
             self.featureView?.rainchanceLabel.text = String(format: "%.0f", rainChance*100) + "%"
         } else {
             self.featureView?.rainchanceLabel.text = "--"
         }
-        if let rainIntensity = meh?.precipIntensity {
+        if let rainIntensity = current?.precipIntensity {
             if SupportFunctions.isMetric == true {
                 self.featureView?.rainintensityLabel.text = String(format: "%.0f mm/h", rainIntensity*25.4)
             } else {
@@ -211,17 +208,17 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.rainintensityLabel.text = "--"
         }
-        if let UVIndex = meh?.uvIndex {
+        if let UVIndex = current?.uvIndex {
             self.featureView?.uvindexLabel.text = String(UVIndex)
         } else {
             self.featureView?.uvindexLabel.text = "--"
         }
-        if let cloudCover = meh?.cloudCover {
+        if let cloudCover = current?.cloudCover {
             self.featureView?.cloudcoverLabel.text = String(format: "%.0f", cloudCover*100) + "%"
         } else {
             self.featureView?.cloudcoverLabel.text = "--"
         }
-        if let visibility = meh?.visibility {
+        if let visibility = current?.visibility {
             if SupportFunctions.isMetric == true {
                 self.featureView?.visibilityLabel.text = String(format: "%.0f km", visibility*1.60934)
             } else {
@@ -230,7 +227,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             self.featureView?.visibilityLabel.text = "--"
         }
-        if let pressure = meh?.pressure {
+        if let pressure = current?.pressure {
             self.featureView?.pressureLabel.text = String(format: "%.0f hPa", pressure)
         } else {
             self.featureView?.pressureLabel.text = "--"
@@ -244,6 +241,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //Display Hourly Weather
         let cell = self.hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
         let aHour = response.hourly?.data[indexPath.row]
         let dateFormatter = DateFormatter()
@@ -273,6 +271,7 @@ class ViewWeatherViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //Display last 7 days + current day + 7 next days weather
         let cell = dailyTableView.dequeueReusableCell(withIdentifier: "dailyTableViewCell", for: indexPath) as! DailyTableViewCell
         let aDate = timeMachineAndForecastWeatherData[indexPath.row]
         let location = CLLocationCoordinate2D(latitude: city.lat, longitude: city.long)

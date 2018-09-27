@@ -175,7 +175,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
-				ORGANIZATIONNAME = "Mai Pham Quang Huy";
+				ORGANIZATIONNAME = RMIT;
 				TargetAttributes = {
 					9B2939302158BC1E00799E40 = {
 						CreatedOnToolsVersion = 10.0;

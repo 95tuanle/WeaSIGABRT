@@ -38,9 +38,9 @@ class SupportFunctions {
     
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
-    static let request = WXKDarkSkyRequest(key: "feb9c547f52812c44c06e0de9983ba24")
-//    static let apiKey: String = "9b43add4303def8ddb395cc7fec44be7"
+    static let request = WXKDarkSkyRequest(key: "9b43add4303def8ddb395cc7fec44be7") //    feb9c547f52812c44c06e0de9983ba24
     static let emojiIcons = [
+        //Dictionary for icons
         "clear-day" : "☀️",
         "clear-night" : "🌙",
         "rain" : "☔️",
@@ -54,6 +54,7 @@ class SupportFunctions {
     ]
     
     static func forecastAndTimeMachineQuery(city:City) -> [WXKDarkSkyDataPoint] {
+        //Get 15 days weather
         let point = WXKDarkSkyRequest.Point(latitude: city.lat, longitude: city.long)
         var responses:[WXKDarkSkyDataPoint] = []
         var dates:[Date] = []
@@ -63,7 +64,6 @@ class SupportFunctions {
             dates.append(yesterday!)
         }
         let options = WXKDarkSkyRequest.Options(exclude: [.flags, .alerts, .hourly, .currently, .minutely])
-
         for date in dates {
             let group = DispatchGroup()
             group.enter()
@@ -96,6 +96,7 @@ class SupportFunctions {
     }
     
     static func getCurrentWeather(latitude: Double, longitude: Double) -> WXKDarkSkyResponse {
+        //Get Current Weather
         let group = DispatchGroup()
         group.enter()
         let point = WXKDarkSkyRequest.Point(latitude: latitude, longitude: longitude)
@@ -110,7 +111,6 @@ class SupportFunctions {
                 }
             }
         }
-        
         group.wait()
         return temp!
     }
@@ -133,11 +133,13 @@ class SupportFunctions {
     }
     
     static func fahrenheitToCelsius(temperature: Double) -> Double {
+        //Conver F to C
         let celsiusTemperature = (temperature-32)*(5/9)
         return celsiusTemperature
     }
     
     static func localTimeAtThatLocationCustom(time: Double, identifier: String, format: String) -> String {
+        //Convert date to name of date in a week
         let date = Date(timeIntervalSince1970: time)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: identifier)
