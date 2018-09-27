@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "020FAB7F1355AC2A1D0F79C19D733416"
+               BlueprintIdentifier = "4CDF783077AFD0B1534A02A394DE21A1"
                BlueprintName = "WXKDarkSky"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "WXKDarkSky.framework">
