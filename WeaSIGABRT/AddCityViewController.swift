@@ -32,6 +32,7 @@ class AddCityViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        resultTable.backgroundColor = UIColor.darkGray
         resultTable.tableFooterView = UIView()
         resultTable.dataSource = self
         resultTable.delegate = self
