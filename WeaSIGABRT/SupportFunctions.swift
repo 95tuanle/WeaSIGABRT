@@ -38,7 +38,7 @@ class SupportFunctions {
     
     static var isMetric: Bool = true
     static var isCelsius: Bool = true
-    static let request = WXKDarkSkyRequest(key: "9b43add4303def8ddb395cc7fec44be7") //    feb9c547f52812c44c06e0de9983ba24
+    static let request = WXKDarkSkyRequest(key: "5528c7901c45cba63baa891e648c897e") //    feb9c547f52812c44c06e0de9983ba24
     static let emojiIcons = [
         //Dictionary for icons
         "clear-day" : "☀️",
