@@ -7,5 +7,5 @@ target 'WeaSIGABRT' do
 
   # Pods for WeaSIGABRT
 	pod 'WXKDarkSky', '~> 2.2.0'
-	pod 'LatLongToTimezone'
+	pod 'LatLongToTimezone', '~> 1.1'
 end
